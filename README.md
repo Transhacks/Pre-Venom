@@ -6,3 +6,5 @@ Features:
 Working mystic well
 
 No console errors
+
+Test server: traficantes.wtf
