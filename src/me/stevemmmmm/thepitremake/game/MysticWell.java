@@ -615,21 +615,38 @@ public class MysticWell implements Listener {
 	    if (groupEnchants.isEmpty()) {
 	        // Find an alternative group
 	        EnchantGroup[] allGroups = EnchantGroup.values();
-	        EnchantGroup randomGroup;
-	        do {
-	            randomGroup = allGroups[ThreadLocalRandom.current().nextInt(allGroups.length)];
-	        } while (randomGroup == group); // Ensure the alternative group is different
+	        List<EnchantGroup> nonEmptyGroups = new ArrayList<>();
 
-	        for (CustomEnchant enchant : CustomEnchantManager.getInstance().getEnchants()) {
-	            if (enchant != null && enchant.getEnchantGroup() == randomGroup && enchant.isCompatibleWith(type)) {
-	                groupEnchants.add(enchant);
+	        for (EnchantGroup grp : allGroups) {
+	            if (grp != group) { // Exclude the original group
+	                boolean groupHasEnchants = false;
+
+	                for (CustomEnchant enchant : CustomEnchantManager.getInstance().getEnchants()) {
+	                    if (enchant != null && enchant.getEnchantGroup() == grp && enchant.isCompatibleWith(type)) {
+	                        groupHasEnchants = true;
+	                        break;
+	                    }
+	                }
+
+	                if (groupHasEnchants) {
+	                    nonEmptyGroups.add(grp);
+	                }
 	            }
 	        }
+
+	        if (!nonEmptyGroups.isEmpty()) {
+	            EnchantGroup randomGroup = nonEmptyGroups.get(ThreadLocalRandom.current().nextInt(nonEmptyGroups.size()));
+
+	            for (CustomEnchant enchant : CustomEnchantManager.getInstance().getEnchants()) {
+	                if (enchant != null && enchant.getEnchantGroup() == randomGroup && enchant.isCompatibleWith(type)) {
+	                    groupEnchants.add(enchant);
+	                }
+	            }
+	        } 
 	    }
 
 	    return groupEnchants.get(ThreadLocalRandom.current().nextInt(groupEnchants.size()));
 	}
-
 
 	private void setMysticWellAnimation(Player player, MysticWellAnimation animation) {
 		Inventory gui = playerGuis.get(player.getUniqueId());
