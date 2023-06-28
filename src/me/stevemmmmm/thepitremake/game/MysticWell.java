@@ -600,32 +600,36 @@ public class MysticWell implements Listener {
 	}
 
 	private CustomEnchant getRandomEnchantFromGroup(EnchantGroup group, Material type) {
-		ArrayList<CustomEnchant> groupEnchants = new ArrayList<>();
+	    ArrayList<CustomEnchant> groupEnchants = new ArrayList<>();
 
-		for (CustomEnchant enchant : CustomEnchantManager.getInstance().getEnchants()) {
-			if (enchant != null && enchant.getEnchantGroup() == group && enchant.isCompatibleWith(type)) {
-				groupEnchants.add(enchant);
-			}
-		}
+	    for (CustomEnchant enchant : CustomEnchantManager.getInstance().getEnchants()) {
+	        if (enchant != null && enchant.getEnchantGroup() == group && enchant.isCompatibleWith(type)) {
+	            groupEnchants.add(enchant);
+	        }
+	    }
 
-		if (groupEnchants.size() == 1) {
-			return groupEnchants.get(0);
-		}
+	    if (groupEnchants.size() == 1) {
+	        return groupEnchants.get(0);
+	    }
 
-		if (groupEnchants.isEmpty()) {
-			
-			EnchantGroup[] allGroups = EnchantGroup.values();
-			EnchantGroup randomGroup = allGroups[ThreadLocalRandom.current().nextInt(allGroups.length)];
+	    if (groupEnchants.isEmpty()) {
+	        // Find an alternative group
+	        EnchantGroup[] allGroups = EnchantGroup.values();
+	        EnchantGroup randomGroup;
+	        do {
+	            randomGroup = allGroups[ThreadLocalRandom.current().nextInt(allGroups.length)];
+	        } while (randomGroup == group); // Ensure the alternative group is different
 
-			for (CustomEnchant enchant : CustomEnchantManager.getInstance().getEnchants()) {
-				if (enchant != null && enchant.getEnchantGroup() == randomGroup && enchant.isCompatibleWith(type)) {
-					groupEnchants.add(enchant);
-				}
-			}
-		}
+	        for (CustomEnchant enchant : CustomEnchantManager.getInstance().getEnchants()) {
+	            if (enchant != null && enchant.getEnchantGroup() == randomGroup && enchant.isCompatibleWith(type)) {
+	                groupEnchants.add(enchant);
+	            }
+	        }
+	    }
 
-		return groupEnchants.get(ThreadLocalRandom.current().nextInt(groupEnchants.size()));
+	    return groupEnchants.get(ThreadLocalRandom.current().nextInt(groupEnchants.size()));
 	}
+
 
 	private void setMysticWellAnimation(Player player, MysticWellAnimation animation) {
 		Inventory gui = playerGuis.get(player.getUniqueId());
