@@ -20,32 +20,29 @@ import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerInfo;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 
 public class SetLevelCommand implements CommandExecutor {
-	
+
 	private void updateDisplayName(Player player) {
-	    ((CraftPlayer) player).getHandle().listName = CraftChatMessage
-	        .fromString(GrindingSystem.getInstance().getFormattedPlayerLevelWithoutPrestige(player)
-	            + PermissionsManager.getInstance().getPlayerRank(player).getNameColor()
-	            + " " + player.getName())[0];
-	    ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutPlayerInfo(
-	        PacketPlayOutPlayerInfo.EnumPlayerInfoAction.UPDATE_DISPLAY_NAME, ((CraftPlayer) player).getHandle()));
+		((CraftPlayer) player).getHandle().listName = CraftChatMessage
+				.fromString(GrindingSystem.getInstance().getFormattedPlayerLevelWithoutPrestige(player)
+						+ PermissionsManager.getInstance().getPlayerRank(player).getNameColor() + " "
+						+ player.getName())[0];
+		((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutPlayerInfo(
+				PacketPlayOutPlayerInfo.EnumPlayerInfoAction.UPDATE_DISPLAY_NAME, ((CraftPlayer) player).getHandle()));
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-	    Player player = (Player) sender;
+		Player player = (Player) sender;
 
-	    if (label.equalsIgnoreCase("setlevel")) {
-	        if (args.length > 0) {
-	            if (args[0] != null) {
-	                if (StringUtils.isNumeric(args[0])) {
-	                    if(player.hasPermission("bhpit.setlevel")) {
-	                        int level = Integer.parseInt(args[0]);
+		if (label.equalsIgnoreCase("setlevel")) {
+			if (args.length > 0) {
+				if (args[0] != null) {
+					if (StringUtils.isNumeric(args[0])) {
+						int level = Integer.parseInt(args[0]);
+						level = Math.min(level, 120); // Restrict prestige to maximum value of 70
+						
 
-	                        if (level > 120) {
-	                            level = 120;
-	                        }
-	                        
-	                        if (!(GrindingSystem.getInstance().getPlayerLevel(player) == level)) {
+						if (!(GrindingSystem.getInstance().getPlayerLevel(player) == level)) {
 
 							IChatBaseComponent chatTitle = IChatBaseComponent.ChatSerializer
 									.a("{\"text\": \"" + ChatColor.AQUA.toString() + ChatColor.BOLD + "LEVEL UP!"
@@ -118,8 +115,8 @@ public class SetLevelCommand implements CommandExecutor {
 											player.sendMessage(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD
 													+ "You may need to relog to see the effects.");
 											updateDisplayName(player);
-											Main.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(),
-					                                () -> updateDisplayName(player), 1);
+											Main.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(
+													Main.getInstance(), () -> updateDisplayName(player), 1);
 
 										}
 									}, 1L);
@@ -127,8 +124,7 @@ public class SetLevelCommand implements CommandExecutor {
 						}
 
 					} else {
-						player.sendMessage(
-								ChatColor.RED + "You do not have the required permission to execute this command!");
+						player.sendMessage(ChatColor.RED + "Usage: /setlevel <level>");
 					}
 				} else {
 					player.sendMessage(ChatColor.RED + "Usage: /setlevel <level>");
@@ -136,13 +132,9 @@ public class SetLevelCommand implements CommandExecutor {
 			} else {
 				player.sendMessage(ChatColor.RED + "Usage: /setlevel <level>");
 			}
-			} else {
-				player.sendMessage(ChatColor.RED + "Usage: /setlevel <level>");
-			}
-			}
-		
+		}
+
 		return true;
 	}
 
 }
-	

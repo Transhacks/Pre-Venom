@@ -31,57 +31,69 @@ public class SetPrestigeCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
-            Player player = (Player)sender;
+            Player player = (Player) sender;
             if (label.equalsIgnoreCase("setprestige")) {
                 if (args.length > 0) {
                     if (args[0] != null) {
                         if (StringUtils.isNumeric(args[0])) {
-                            if (player.hasPermission("bhpit.setprestige")) {
-                                int prestige = Integer.parseInt(args[0]);
-                                if (prestige > 70) {
-                                    prestige = 70;
-                                }
+                            int prestige = Integer.parseInt(args[0]);
+                            prestige = Math.min(prestige, 70); // Restrict prestige to maximum value of 70
 
-                                if (prestige == 0) {
-                                    player.sendMessage(ChatColor.RED + "Because of an issue disconnecting the player upon setting their level to 60 at prestige 0, you unfortunately can't set your prestige to 0. Sorry!");
-                                    return true;
-                                }
-
-                                GrindingSystem.getInstance().setPlayerPrestige(player, prestige);
-                                GrindingSystem.getInstance().setPlayerLevel(player, 1);
-                                GrindingSystem.getInstance().writeToConfig();
-                                IChatBaseComponent chatTitle = ChatSerializer.a("{\"text\": \"" + ChatColor.YELLOW.toString() + ChatColor.BOLD + "PRESTIGE" + "\",color:" + ChatColor.GOLD.name().toLowerCase() + "}");
-                                PacketPlayOutTitle title = new PacketPlayOutTitle(EnumTitleAction.TITLE, chatTitle);
-                                PacketPlayOutTitle length = new PacketPlayOutTitle(20, 20, 20);
-                                IChatBaseComponent chatSubTitle = ChatSerializer.a("{\"text\": \"" + ChatColor.GRAY + "You unlocked prestige " + ChatColor.YELLOW + RomanUtils.getInstance().convertToRomanNumeral(prestige) + "\",color:" + ChatColor.GOLD.name().toLowerCase() + "}");
-                                PacketPlayOutTitle subTitle = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE, chatSubTitle);
-                                PacketPlayOutTitle subTitleLength = new PacketPlayOutTitle(20, 20, 20);
-                                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(title);
-                                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(length);
-                                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(subTitle);
-                                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(subTitleLength);
-                                ((CraftPlayer)player).getHandle().listName = CraftChatMessage.fromString(GrindingSystem.getInstance().getFormattedPlayerLevelWithoutPrestige(player) + PermissionsManager.getInstance().getPlayerRank(player).getNameColor() + " " + player.getName())[0];
-                                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.UPDATE_DISPLAY_NAME, new EntityPlayer[]{((CraftPlayer)player).getHandle()}));
-                                ((CraftPlayer)player).getHandle().listName = CraftChatMessage.fromString(GrindingSystem.getInstance().getFormattedPlayerLevelWithoutPrestige(player) + PermissionsManager.getInstance().getPlayerRank(player).getNameColor() + " " + player.getName())[0];
-                                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.UPDATE_DISPLAY_NAME, new EntityPlayer[]{((CraftPlayer)player).getHandle()}));
-                                player.sendMessage(ChatColor.GREEN + "Success!");
-                                player.sendMessage(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + "You may need to relog to see the effects.");
-                                player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1.0F, 1.0F);
-                            } else {
-                                player.sendMessage(ChatColor.RED + "You do not have the required permission to execute this command!");
+                            if (prestige == 0) {
+                                player.sendMessage(ChatColor.RED
+                                        + "Because of an issue disconnecting the player upon setting their level to 60 at prestige 0, you unfortunately can't set your prestige to 0. Sorry!");
+                                return true;
                             }
-                        } else {
-                            player.sendMessage(ChatColor.RED + "Usage: /setprestige <prestige>");
-                        }
-                    } else {
-                        player.sendMessage(ChatColor.RED + "Usage: /setprestige <prestige>");
-                    }
-                } else {
-                    player.sendMessage(ChatColor.RED + "Usage: /setprestige <prestige>");
-                }
-            }
-        }
 
-        return true;
-    }
+							GrindingSystem.getInstance().setPlayerPrestige(player, prestige);
+							GrindingSystem.getInstance().setPlayerLevel(player, 1);
+							GrindingSystem.getInstance().writeToConfig();
+							IChatBaseComponent chatTitle = ChatSerializer
+									.a("{\"text\": \"" + ChatColor.YELLOW.toString() + ChatColor.BOLD + "PRESTIGE"
+											+ "\",color:" + ChatColor.GOLD.name().toLowerCase() + "}");
+							PacketPlayOutTitle title = new PacketPlayOutTitle(EnumTitleAction.TITLE, chatTitle);
+							PacketPlayOutTitle length = new PacketPlayOutTitle(20, 20, 20);
+							IChatBaseComponent chatSubTitle = ChatSerializer
+									.a("{\"text\": \"" + ChatColor.GRAY + "You unlocked prestige " + ChatColor.YELLOW
+											+ RomanUtils.getInstance().convertToRomanNumeral(prestige) + "\",color:"
+											+ ChatColor.GOLD.name().toLowerCase() + "}");
+							PacketPlayOutTitle subTitle = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE,
+									chatSubTitle);
+							PacketPlayOutTitle subTitleLength = new PacketPlayOutTitle(20, 20, 20);
+							((CraftPlayer) player).getHandle().playerConnection.sendPacket(title);
+							((CraftPlayer) player).getHandle().playerConnection.sendPacket(length);
+							((CraftPlayer) player).getHandle().playerConnection.sendPacket(subTitle);
+							((CraftPlayer) player).getHandle().playerConnection.sendPacket(subTitleLength);
+							((CraftPlayer) player).getHandle().listName = CraftChatMessage.fromString(
+									GrindingSystem.getInstance().getFormattedPlayerLevelWithoutPrestige(player)
+											+ PermissionsManager.getInstance().getPlayerRank(player).getNameColor()
+											+ " " + player.getName())[0];
+							((CraftPlayer) player).getHandle().playerConnection
+									.sendPacket(new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.UPDATE_DISPLAY_NAME,
+											new EntityPlayer[] { ((CraftPlayer) player).getHandle() }));
+							((CraftPlayer) player).getHandle().listName = CraftChatMessage.fromString(
+									GrindingSystem.getInstance().getFormattedPlayerLevelWithoutPrestige(player)
+											+ PermissionsManager.getInstance().getPlayerRank(player).getNameColor()
+											+ " " + player.getName())[0];
+							((CraftPlayer) player).getHandle().playerConnection
+									.sendPacket(new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.UPDATE_DISPLAY_NAME,
+											new EntityPlayer[] { ((CraftPlayer) player).getHandle() }));
+							player.sendMessage(ChatColor.GREEN + "Success!");
+							player.sendMessage(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD
+									+ "You may need to relog to see the effects.");
+							player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1.0F, 1.0F);
+						} else {
+							player.sendMessage(ChatColor.RED + "Usage: /setprestige <prestige>");
+						}
+					} else {
+						player.sendMessage(ChatColor.RED + "Usage: /setprestige <prestige>");
+					}
+				} else {
+					player.sendMessage(ChatColor.RED + "Usage: /setprestige <prestige>");
+				}
+			}
+		}
+
+		return true;
+	}
 }
