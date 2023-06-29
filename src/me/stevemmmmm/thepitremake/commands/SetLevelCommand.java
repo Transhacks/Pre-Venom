@@ -39,7 +39,7 @@ public class SetLevelCommand implements CommandExecutor {
 				if (args[0] != null) {
 					if (StringUtils.isNumeric(args[0])) {
 						int level = Integer.parseInt(args[0]);
-						level = Math.min(level, 120); // Restrict prestige to maximum value of 70
+						level = Math.min(level, 120); 
 						
 
 						if (!(GrindingSystem.getInstance().getPlayerLevel(player) == level)) {
