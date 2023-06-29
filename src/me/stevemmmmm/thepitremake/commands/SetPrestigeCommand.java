@@ -37,7 +37,7 @@ public class SetPrestigeCommand implements CommandExecutor {
                     if (args[0] != null) {
                         if (StringUtils.isNumeric(args[0])) {
                             int prestige = Integer.parseInt(args[0]);
-                            prestige = Math.min(prestige, 70); // Restrict prestige to maximum value of 70
+                            prestige = Math.min(prestige, 70); 
 
                             if (prestige == 0) {
                                 player.sendMessage(ChatColor.RED
