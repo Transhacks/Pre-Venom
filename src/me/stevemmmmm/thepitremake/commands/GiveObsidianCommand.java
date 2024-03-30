@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 public class GiveObsidianCommand implements CommandExecutor {
     public GiveObsidianCommand() {
     }
-    
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
         if (label.equalsIgnoreCase("giveobsidian")) {
