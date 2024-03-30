@@ -1,0 +1,83 @@
+name: TheBlueHatsPit
+main: me.stevemmmmm.thepitremake.core.Main
+version: v1.0
+depend: [ServerCore, ProtocolLib, PlaceholderAPI, ShowItem]
+commands:
+  pitenchant:
+    description: Use it to enchant some weapons xD xD
+    usage: /pitenchant
+  mysticenchants:
+    description: Lists the enchants
+    usage: /mysticenchants
+  pitabout:
+    description: Information about this plugin
+    usage: /pitabout
+  reloadcommand:
+    description: Reloads TheBlueHatsPit plugin
+    usage: /reloadcommand
+  givefreshitem:
+    description: Gives a fresh item
+    usage: /givefreshitem
+  giveprot:
+    description: Gives prot
+    usage: /giveprot
+  setgold:
+    description: Sets gold
+    usage: /setgold
+  givebread:
+    description: Gives bread
+    usage: /givebread
+  spawn:
+    description: Sends the player to spawn
+    usage: /spawn
+  respawn:
+    description: Sends the player to spawn
+    usage: /respawn
+  givearrows:
+    description: Gives arrows
+    usage: /givearrows
+  giveobsidian:
+    description: Gives obby
+    usage: /giveobsidian
+  unenchant:
+    description: Unenchants stuff
+    usage: /unenchant
+  togglepvp:
+    description: Toggles pvp
+    usage: /togglepvp
+  selectworld:
+    description: Selects the world
+    usage: /selectworld
+  pithelp:
+    description: All the commands and how to use them
+    usage: /pithelp
+  giveegg:
+    description: Gives a First-Aid Egg
+    usage: /giveegg
+  mutechat:
+    description: Toggles chat
+    usage: /mutechat
+  setprestige:
+    description: Sets prestige
+    usage: /setprestige
+  setlevel:
+    description: Sets level
+    usage: /setlevel
+  gambleimmunity:
+    description: Makes the executor immune to bad Gamble hits
+    usage: /gambleimmunity
+  streak:
+    description: Returns the player's killstreak
+    usage: /streak
+  killannouncements:
+    description: Toggles kill announcements
+    usage: /killannouncements
+  ka:
+    description: Toggles kill announcements
+    usage: /ka
+  nick:
+    description: Adds a nickname to your player
+    usage: /nick
+  setplayerhealth:
+    description: Sets any player's health
+    usage: /setplayerhealth
