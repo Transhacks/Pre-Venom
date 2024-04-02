@@ -71,7 +71,6 @@ public class EnderChest implements Listener {
                 event.getPlayer().openInventory((Inventory)this.playerEnderChestsNonToxicWorld.get(event.getPlayer().getUniqueId()));
             }
         }
-
     }
 
     @EventHandler
@@ -79,25 +78,27 @@ public class EnderChest implements Listener {
         if (event.getInventory().getType() == InventoryType.ENDER_CHEST) {
             this.storeEnderChests();
         }
-
     }
 
     public void storeEnderChests() {
-        Iterator var1 = this.playerEnderChestsToxicWorld.entrySet().iterator();
-
-        Map.Entry entry;
-        while(var1.hasNext()) {
-            entry = (Map.Entry)var1.next();
-            InventorySerializer.serializeInventory(Main.INSTANCE, (UUID)entry.getKey(), "ToxicWorld", (Inventory)entry.getValue());
+        Iterator<Map.Entry<UUID, Inventory>> iterator = playerEnderChestsToxicWorld.entrySet().iterator();
+        
+        while (iterator.hasNext()) {
+            Map.Entry<UUID, Inventory> entry = iterator.next();
+            UUID playerId = entry.getKey();
+            Inventory enderChestInventory = entry.getValue();
+            
+            InventorySerializer.serializeInventory(Main.INSTANCE, playerId, "ToxicWorld", enderChestInventory);
         }
 
-        var1 = this.playerEnderChestsNonToxicWorld.entrySet().iterator();
+        iterator = playerEnderChestsNonToxicWorld.entrySet().iterator();
 
-        while(var1.hasNext()) {
-            entry = (Map.Entry)var1.next();
-            Player player = Bukkit.getPlayer((UUID)entry.getKey());
-            InventorySerializer.serializeInventory(Main.INSTANCE, (UUID)entry.getKey(), "NonToxicWorld", (Inventory)entry.getValue());
+        while (iterator.hasNext()) {
+            Map.Entry<UUID, Inventory> entry = iterator.next();
+            UUID playerId = entry.getKey();
+            Inventory enderChestInventory = entry.getValue();
+            
+            InventorySerializer.serializeInventory(Main.INSTANCE, playerId, "NonToxicWorld", enderChestInventory);
         }
-
     }
 }
