@@ -43,7 +43,7 @@ public class Berserker extends CustomEnchant {
 
     @Override
     public EnchantGroup getEnchantGroup() {
-        return EnchantGroup.A;
+        return EnchantGroup.B;
     }
 
     @Override

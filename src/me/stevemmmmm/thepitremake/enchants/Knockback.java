@@ -57,7 +57,7 @@ public class Knockback extends CustomEnchant {
 
     @Override
     public EnchantGroup getEnchantGroup() {
-        return EnchantGroup.C;
+        return EnchantGroup.B;
     }
 
     @Override

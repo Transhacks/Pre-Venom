@@ -42,7 +42,7 @@ public class Revengeance extends CustomEnchant {
 
     @Override
     public EnchantGroup getEnchantGroup() {
-        return EnchantGroup.A;
+        return EnchantGroup.B;
     }
 
     @Override
