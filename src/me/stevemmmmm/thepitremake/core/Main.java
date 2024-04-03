@@ -360,7 +360,8 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
        	 new Berserker(),
        	 new Knockback(),
        	 new Revengeance(),
-       	 new Hemorrhage()
+       	 new Hemorrhage(),
+         new Shark()
     	};
     
     private void registerEnchants() {
