@@ -49,72 +49,7 @@ import me.stevemmmmm.thepitremake.commands.SpawnCommand;
 import me.stevemmmmm.thepitremake.commands.StreakCommand;
 import me.stevemmmmm.thepitremake.commands.TogglePvPCommand;
 import me.stevemmmmm.thepitremake.commands.UnenchantCommand;
-import me.stevemmmmm.thepitremake.enchants.Assassin;
-import me.stevemmmmm.thepitremake.enchants.BeatTheSpammers;
-import me.stevemmmmm.thepitremake.enchants.Billionaire;
-import me.stevemmmmm.thepitremake.enchants.BooBoo;
-import me.stevemmmmm.thepitremake.enchants.BountyReaper;
-import me.stevemmmmm.thepitremake.enchants.Bruiser;
-import me.stevemmmmm.thepitremake.enchants.BulletTime;
-import me.stevemmmmm.thepitremake.enchants.Chipping;
-import me.stevemmmmm.thepitremake.enchants.ComboDamage;
-import me.stevemmmmm.thepitremake.enchants.ComboHeal;
-import me.stevemmmmm.thepitremake.enchants.ComboStun;
-import me.stevemmmmm.thepitremake.enchants.ComboSwift;
-import me.stevemmmmm.thepitremake.enchants.CounterJanitor;
-import me.stevemmmmm.thepitremake.enchants.Cricket;
-import me.stevemmmmm.thepitremake.enchants.CriticallyFunky;
-import me.stevemmmmm.thepitremake.enchants.Crush;
-import me.stevemmmmm.thepitremake.enchants.DevilChicks;
-import me.stevemmmmm.thepitremake.enchants.DiamondStomp;
-import me.stevemmmmm.thepitremake.enchants.DoubleJump;
-import me.stevemmmmm.thepitremake.enchants.Duelist;
-import me.stevemmmmm.thepitremake.enchants.EscapePod;
-import me.stevemmmmm.thepitremake.enchants.Executioner;
-import me.stevemmmmm.thepitremake.enchants.Explosive;
-import me.stevemmmmm.thepitremake.enchants.FancyRaider;
-import me.stevemmmmm.thepitremake.enchants.Fletching;
-import me.stevemmmmm.thepitremake.enchants.FractionalReserve;
-import me.stevemmmmm.thepitremake.enchants.Frostbite;
-import me.stevemmmmm.thepitremake.enchants.Gamble;
-import me.stevemmmmm.thepitremake.enchants.GottaGoFast;
-import me.stevemmmmm.thepitremake.enchants.Grasshopper;
-import me.stevemmmmm.thepitremake.enchants.Guts;
-import me.stevemmmmm.thepitremake.enchants.Healer;
-import me.stevemmmmm.thepitremake.enchants.Hearts;
-import me.stevemmmmm.thepitremake.enchants.Jumpspammer;
-import me.stevemmmmm.thepitremake.enchants.KingBuster;
-import me.stevemmmmm.thepitremake.enchants.LastStand;
-import me.stevemmmmm.thepitremake.enchants.Lifesteal;
-import me.stevemmmmm.thepitremake.enchants.LuckyShot;
-import me.stevemmmmm.thepitremake.enchants.Megalongbow;
-import me.stevemmmmm.thepitremake.enchants.Mirror;
-import me.stevemmmmm.thepitremake.enchants.NotGladiator;
-import me.stevemmmmm.thepitremake.enchants.PainFocus;
-import me.stevemmmmm.thepitremake.enchants.Parasite;
-import me.stevemmmmm.thepitremake.enchants.Peroxide;
-import me.stevemmmmm.thepitremake.enchants.Perun;
-import me.stevemmmmm.thepitremake.enchants.Pitpocket;
-import me.stevemmmmm.thepitremake.enchants.Prick;
-import me.stevemmmmm.thepitremake.enchants.Protection;
-import me.stevemmmmm.thepitremake.enchants.Pullbow;
-import me.stevemmmmm.thepitremake.enchants.Punisher;
-import me.stevemmmmm.thepitremake.enchants.PushComesToShove;
-import me.stevemmmmm.thepitremake.enchants.RespawnAbsorption;
-import me.stevemmmmm.thepitremake.enchants.Revitalize;
-import me.stevemmmmm.thepitremake.enchants.RingArmor;
-import me.stevemmmmm.thepitremake.enchants.Robinhood;
-import me.stevemmmmm.thepitremake.enchants.Sharp;
-import me.stevemmmmm.thepitremake.enchants.Solitude;
-import me.stevemmmmm.thepitremake.enchants.SpeedyHit;
-import me.stevemmmmm.thepitremake.enchants.SprintDrain;
-import me.stevemmmmm.thepitremake.enchants.Sweaty;
-import me.stevemmmmm.thepitremake.enchants.TNT;
-import me.stevemmmmm.thepitremake.enchants.Telebow;
-import me.stevemmmmm.thepitremake.enchants.ThePunch;
-import me.stevemmmmm.thepitremake.enchants.TrueShot;
-import me.stevemmmmm.thepitremake.enchants.Volley;
-import me.stevemmmmm.thepitremake.enchants.Wasp;
+import me.stevemmmmm.thepitremake.enchants.*;
 import me.stevemmmmm.thepitremake.game.Bread;
 import me.stevemmmmm.thepitremake.game.ChatManagement;
 import me.stevemmmmm.thepitremake.game.CombatManager;
@@ -420,7 +355,8 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
        	 new Volley(),
        	 new Wasp(),
        	 new TNT(),
-       	 new BountyReaper()
+       	 new BountyReaper(),
+       	 new GoldAndBoosted()
     	};
     
     private void registerEnchants() {
