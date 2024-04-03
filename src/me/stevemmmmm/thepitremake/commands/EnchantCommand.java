@@ -137,7 +137,7 @@ public class EnchantCommand implements TabExecutor {
                     "Bullettime", "Combodamage", "Painfocus", "Kingbuster", "Punisher", "Comboswift",
                     "Bruiser", "Frostbite", "Executioner", "Beatthespammers", "Comboheal", "Sweaty",
                     "Sharp", "Gamble", "FancyRaider", "Grasshopper", "Guts", "Crush",
-                    "Speedyhit", "Punch", "Counter-janitor", "Pitpocket", "Duelist", "Speedyhit"
+                    "Speedyhit", "Punch", "Counter-janitor", "Pitpocket", "Duelist", "Speedyhit", "BountyReaper"
             ));
         } else if (player.getInventory().getItemInHand().getType() == Material.BOW) {
             options.addAll(List.of(

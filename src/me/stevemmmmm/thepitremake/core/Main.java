@@ -53,6 +53,7 @@ import me.stevemmmmm.thepitremake.enchants.Assassin;
 import me.stevemmmmm.thepitremake.enchants.BeatTheSpammers;
 import me.stevemmmmm.thepitremake.enchants.Billionaire;
 import me.stevemmmmm.thepitremake.enchants.BooBoo;
+import me.stevemmmmm.thepitremake.enchants.BountyReaper;
 import me.stevemmmmm.thepitremake.enchants.Bruiser;
 import me.stevemmmmm.thepitremake.enchants.BulletTime;
 import me.stevemmmmm.thepitremake.enchants.Chipping;
@@ -419,6 +420,7 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
        	 new Volley(),
        	 new Wasp(),
        	 new TNT(),
+       	 new BountyReaper()
     	};
     
     private void registerEnchants() {
