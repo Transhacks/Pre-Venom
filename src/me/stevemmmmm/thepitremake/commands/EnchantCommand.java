@@ -134,7 +134,7 @@ public class EnchantCommand implements TabExecutor {
         if (player.getInventory().getItemInHand().getType() == Material.GOLD_SWORD) {
             options.addAll(List.of(
                     "Billionaire", "Healer", "Perun", "Combostun", "Lifesteal", "Diamondstomp", "Berserker",
-                    "Bullettime", "Combodamage", "Painfocus", "Kingbuster", "Punisher", "Comboswift",
+                    "Bullettime", "Combodamage", "Painfocus", "Kingbuster", "Punisher", "Comboswift", "Hemorrhage",
                     "Bruiser", "Frostbite", "Executioner", "Beatthespammers", "Comboheal", "Sweaty", "Knockback",
                     "Sharp", "Gamble", "FancyRaider", "Grasshopper", "Guts", "Crush", "GoldAndBoosted",
                     "Punch", "Counter-janitor", "Pitpocket", "Duelist", "Speedyhit", "BountyReaper", "Revengeance"
