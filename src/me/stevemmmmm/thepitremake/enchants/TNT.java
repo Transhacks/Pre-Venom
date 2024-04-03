@@ -32,7 +32,7 @@ public class TNT extends CustomEnchant {
                 .declareVariable("1", "2", "3")
                 .declareVariable("1", "1.5", "2")
                 .declareVariable("1", "1", "2")
-                .write("Spawn with ").setColor(ChatColor.RED).writeVariable(0, level).write(" TNT").resetColor().write(",").setColor(ChatColor.RED).write(" TNT").resetColor().next()
+                .write("Spawn with ").setColor(ChatColor.RED).writeVariable(0, level).write(" TNT").resetColor().write(".").setColor(ChatColor.RED).write(" TNT").resetColor().next()
                 .write("explodes after 1.5 seconds and").next()
                 .write("deals ").setColor(ChatColor.RED).writeVariable(1, level).write("❤").resetColor().write(" in a 3 blocks radius.").next()
                 .write("Gain ") .setColor(ChatColor.RED).write("+").writeVariable(2, level).write(" TNT").resetColor().write(" on kill")
