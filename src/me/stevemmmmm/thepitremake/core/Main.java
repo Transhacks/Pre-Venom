@@ -108,6 +108,7 @@ import me.stevemmmmm.thepitremake.enchants.Solitude;
 import me.stevemmmmm.thepitremake.enchants.SpeedyHit;
 import me.stevemmmmm.thepitremake.enchants.SprintDrain;
 import me.stevemmmmm.thepitremake.enchants.Sweaty;
+import me.stevemmmmm.thepitremake.enchants.TNT;
 import me.stevemmmmm.thepitremake.enchants.Telebow;
 import me.stevemmmmm.thepitremake.enchants.ThePunch;
 import me.stevemmmmm.thepitremake.enchants.TrueShot;
@@ -417,6 +418,7 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
        	 new TrueShot(),
        	 new Volley(),
        	 new Wasp(),
+       	 new TNT(),
     	};
     
     private void registerEnchants() {

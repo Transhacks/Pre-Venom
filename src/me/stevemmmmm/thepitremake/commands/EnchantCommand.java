@@ -149,7 +149,7 @@ public class EnchantCommand implements TabExecutor {
             options.addAll(List.of(
                     "Mirror", "Solitude", "Assassin", "Critfunky", "LastStand", "Peroxide",
                     "BooBoo", "Frac", "RingArmor", "Protection", "Cricket", "Revitalize", "Prick",
-                    "EscapePod", "Absorption", "Hearts", "NotGladiator", "Doublejump"
+                    "EscapePod", "Absorption", "Hearts", "NotGladiator", "Doublejump", "TNT"
             ));
         }
         if (args.length == 1) {
