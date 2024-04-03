@@ -361,7 +361,8 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
        	 new Knockback(),
        	 new Revengeance(),
        	 new Hemorrhage(),
-         new Shark()
+         new Shark(),
+         new SpeedyKill()
     	};
     
     private void registerEnchants() {
