@@ -356,7 +356,8 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
        	 new Wasp(),
        	 new TNT(),
        	 new BountyReaper(),
-       	 new GoldAndBoosted()
+       	 new GoldAndBoosted(),
+       	 new Berserker()
     	};
     
     private void registerEnchants() {
