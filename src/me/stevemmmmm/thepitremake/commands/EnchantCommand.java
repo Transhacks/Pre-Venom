@@ -135,7 +135,7 @@ public class EnchantCommand implements TabExecutor {
             options.addAll(List.of(
                     "Billionaire", "Healer", "Perun", "Combostun", "Lifesteal", "Diamondstomp", "Berserker",
                     "Bullettime", "Combodamage", "Painfocus", "Kingbuster", "Punisher", "Comboswift",
-                    "Bruiser", "Frostbite", "Executioner", "Beatthespammers", "Comboheal", "Sweaty",
+                    "Bruiser", "Frostbite", "Executioner", "Beatthespammers", "Comboheal", "Sweaty", "Knockback",
                     "Sharp", "Gamble", "FancyRaider", "Grasshopper", "Guts", "Crush", "GoldAndBoosted",
                     "Speedyhit", "Punch", "Counter-janitor", "Pitpocket", "Duelist", "Speedyhit", "BountyReaper"
             ));
