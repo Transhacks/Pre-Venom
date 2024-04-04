@@ -1,14 +1,9 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package me.stevemmmmm.thepitremake.managers.enchants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import me.stevemmmmm.thepitremake.enchants.Mirror;
+import me.stevemmmmm.thepitremake.enchants.pants.Mirror;
 import me.stevemmmmm.thepitremake.game.CombatManager;
 import me.stevemmmmm.thepitremake.game.RegionManager;
 import me.stevemmmmm.thepitremake.game.RegionManager.RegionType;

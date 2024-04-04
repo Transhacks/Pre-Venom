@@ -143,11 +143,11 @@ public class EnchantCommand implements TabExecutor {
             options.addAll(List.of(
                     "Robinhood", "Telebow", "Megalongbow", "Volley", "LuckyShot", "DevilChicks",
                     "Explosive", "Wasp", "Parasite", "Pcts", "Chipping", "Fletching", "SprintDrain",
-                    "Jumpspammer", "Pullbow", "TrueShot"
+                    "Jumpspammer", "Pullbow", "TrueShot", "Sweaty"
             ));
         } else if (player.getInventory().getItemInHand().getType() == Material.LEATHER_LEGGINGS) {
             options.addAll(List.of(
-                    "Mirror", "Solitude", "Assassin", "Critfunky", "LastStand", "Peroxide",
+                    "Mirror", "Solitude", "Assassin", "Critfunky", "LastStand", "Peroxide", "Sweaty",
                     "BooBoo", "Frac", "RingArmor", "Protection", "Cricket", "Revitalize", "Prick",
                     "EscapePod", "Absorption", "Hearts", "NotGladiator", "Doublejump", "TNT"
             ));
