@@ -81,7 +81,7 @@ public class DamageManager implements Listener {
                 damage *= 0.9;
             }
             if (player.getInventory().getHelmet() != null && player.getInventory().getHelmet().getType() == Material.GOLD_HELMET && !CustomEnchantManager.getInstance().getItemEnchants(player.getInventory().getHelmet()).isEmpty()) {
-                damage *= 0.957;
+                damage *= 0.9565;
             }
         }
 
@@ -118,7 +118,7 @@ public class DamageManager implements Listener {
                 damage *= 0.9;
             }
             if (player.getInventory().getHelmet() != null && player.getInventory().getHelmet().getType() == Material.GOLD_HELMET && !CustomEnchantManager.getInstance().getItemEnchants(player.getInventory().getHelmet()).isEmpty()) {
-            	damage *= 0.957;
+            	damage *= 0.9565;
             }
         }
 
