@@ -51,6 +51,16 @@ public class EnchantCommand implements TabExecutor {
                         sendErrorMessage(player, "You are not holding anything!");
                         return true;
                     }
+                    
+                    if (item.getType() == Material.DIAMOND_CHESTPLATE) {
+                        sendErrorMessage(player, "You cannot enchant this item!");
+                        return true;
+                    }
+                    
+                    if (item.getType() == Material.GOLD_HELMET) {
+                        sendErrorMessage(player, "You cannot enchant this item!");
+                        return true;
+                    }
 
                     if (args.length < 2) {
                         sendErrorMessage(player, "You did not specify an enchantment level!");

@@ -42,7 +42,7 @@ public class LivesSystem implements Listener {
 		    	ItemMeta itemMeta = item.getItemMeta();
 		    	if (itemMeta != null && itemMeta.getDisplayName() != null) {
 		    		ArrayList<String> displayName = new ArrayList<>(Arrays.asList(ChatColor.stripColor(itemMeta.getDisplayName()).split(" ")));
-	                if (displayName.contains("Tier")) {
+		    		if (displayName.contains("Tier") || displayName.contains("Golden") || displayName.contains("Archangel")) {
 	                	CustomEnchantManager.getInstance().setItemLives(item, CustomEnchantManager.getInstance().getItemLives(item) - 1);
 	                	
 	                	destroyItem(item, player, playerInventory, i, false);
@@ -58,7 +58,7 @@ public class LivesSystem implements Listener {
 		    	ItemMeta armorMeta = armorPiece.getItemMeta();
 		    	if (armorMeta != null && armorMeta.getDisplayName() != null) {
 		    		ArrayList<String> displayName = new ArrayList<>(Arrays.asList(ChatColor.stripColor(armorMeta.getDisplayName()).split(" ")));
-	                if (displayName.contains("Tier")) {
+		    		if (displayName.contains("Tier") || displayName.contains("Golden") || displayName.contains("Archangel")) {
 	                	CustomEnchantManager.getInstance().setItemLives(armorPiece, CustomEnchantManager.getInstance().getItemLives(armorPiece) - 1);
 	                	
 	                	destroyItem(armorPiece, player, playerInventory, i, true);

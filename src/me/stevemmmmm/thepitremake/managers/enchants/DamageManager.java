@@ -74,8 +74,14 @@ public class DamageManager implements Listener {
 
         if (event.getEntity() instanceof Player) {
             Player player = (Player)event.getEntity();
-            if (player.getInventory().getLeggings() != null && player.getInventory().getLeggings().getType() == Material.LEATHER_LEGGINGS && !CustomEnchantManager.getInstance().getItemEnchants(player.getInventory().getLeggings()).isEmpty()) {
+            if (player.getInventory().getLeggings() != null && player.getInventory().getLeggings().getType() == Material.LEATHER_LEGGINGS ) {
                 damage *= 0.871;
+            }
+            if (player.getInventory().getChestplate() != null && player.getInventory().getChestplate().getType() == Material.DIAMOND_CHESTPLATE && !CustomEnchantManager.getInstance().getItemEnchants(player.getInventory().getChestplate()).isEmpty()) {
+                damage *= 0.9;
+            }
+            if (player.getInventory().getHelmet() != null && player.getInventory().getHelmet().getType() == Material.GOLD_HELMET && !CustomEnchantManager.getInstance().getItemEnchants(player.getInventory().getHelmet()).isEmpty()) {
+                damage *= 0.957;
             }
         }
 
@@ -105,8 +111,14 @@ public class DamageManager implements Listener {
 
         if (event.getEntity() instanceof Player) {
             Player player = (Player)event.getEntity();
-            if (player.getInventory().getLeggings() != null && player.getInventory().getLeggings().getType() == Material.LEATHER_LEGGINGS && !CustomEnchantManager.getInstance().getItemEnchants(player.getInventory().getLeggings()).isEmpty()) {
+            if (player.getInventory().getLeggings() != null && player.getInventory().getLeggings().getType() == Material.LEATHER_LEGGINGS ) {
                 damage *= 0.871;
+            }
+            if (player.getInventory().getChestplate() != null && player.getInventory().getChestplate().getType() == Material.DIAMOND_CHESTPLATE && !CustomEnchantManager.getInstance().getItemEnchants(player.getInventory().getChestplate()).isEmpty()) {
+                damage *= 0.9;
+            }
+            if (player.getInventory().getHelmet() != null && player.getInventory().getHelmet().getType() == Material.GOLD_HELMET && !CustomEnchantManager.getInstance().getItemEnchants(player.getInventory().getHelmet()).isEmpty()) {
+            	damage *= 0.957;
             }
         }
 

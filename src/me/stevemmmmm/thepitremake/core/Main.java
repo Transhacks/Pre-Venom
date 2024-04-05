@@ -25,34 +25,13 @@ import me.stevemmmmm.configapi.core.ConfigAPI;
 import me.stevemmmmm.servercore.core.ServerGame;
 import me.stevemmmmm.servercore.core.WorldType;
 import me.stevemmmmm.thepitremake.chat.LevelChatFormatting;
-import me.stevemmmmm.thepitremake.commands.EnchantCommand;
-import me.stevemmmmm.thepitremake.commands.GambleImmunityCommand;
-import me.stevemmmmm.thepitremake.commands.GiveArrowCommand;
-import me.stevemmmmm.thepitremake.commands.GiveBreadCommand;
-import me.stevemmmmm.thepitremake.commands.GiveEggCommand;
-import me.stevemmmmm.thepitremake.commands.GiveFreshItemCommand;
-import me.stevemmmmm.thepitremake.commands.GiveObsidianCommand;
-import me.stevemmmmm.thepitremake.commands.GiveProtCommand;
-import me.stevemmmmm.thepitremake.commands.KillAnnouncementCommand;
-import me.stevemmmmm.thepitremake.commands.MuteChatCommand;
-import me.stevemmmmm.thepitremake.commands.MysticEnchantsCommand;
-import me.stevemmmmm.thepitremake.commands.NickCommand;
-import me.stevemmmmm.thepitremake.commands.PitAboutCommand;
-import me.stevemmmmm.thepitremake.commands.PitHelpCommand;
-import me.stevemmmmm.thepitremake.commands.Reload;
-import me.stevemmmmm.thepitremake.commands.SelectWorldCommand;
-import me.stevemmmmm.thepitremake.commands.SetGoldCommand;
-import me.stevemmmmm.thepitremake.commands.SetLevelCommand;
-import me.stevemmmmm.thepitremake.commands.SetPlayerHealthCommand;
-import me.stevemmmmm.thepitremake.commands.SetPrestigeCommand;
-import me.stevemmmmm.thepitremake.commands.SpawnCommand;
-import me.stevemmmmm.thepitremake.commands.StreakCommand;
-import me.stevemmmmm.thepitremake.commands.TogglePvPCommand;
-import me.stevemmmmm.thepitremake.commands.UnenchantCommand;
+import me.stevemmmmm.thepitremake.commands.*;
 import me.stevemmmmm.thepitremake.enchants.pants.*;
+import me.stevemmmmm.thepitremake.enchants.special.Guardian;
+import me.stevemmmmm.thepitremake.enchants.special.Royalty;
 import me.stevemmmmm.thepitremake.enchants.bow.*;
 import me.stevemmmmm.thepitremake.enchants.sword.*;
-import me.stevemmmmm.thepitremake.enchants.universal.Sweaty;
+import me.stevemmmmm.thepitremake.enchants.universal.*;
 import me.stevemmmmm.thepitremake.game.Bread;
 import me.stevemmmmm.thepitremake.game.ChatManagement;
 import me.stevemmmmm.thepitremake.game.CombatManager;
@@ -72,9 +51,7 @@ import me.stevemmmmm.thepitremake.managers.enchants.BowManager;
 import me.stevemmmmm.thepitremake.managers.enchants.CustomEnchant;
 import me.stevemmmmm.thepitremake.managers.enchants.CustomEnchantManager;
 import me.stevemmmmm.thepitremake.managers.enchants.DamageManager;
-import me.stevemmmmm.thepitremake.managers.other.GrindingSystem;
-import me.stevemmmmm.thepitremake.managers.other.PitScoreboardManager;
-import me.stevemmmmm.thepitremake.managers.other.ServerMOTDInitializer;
+import me.stevemmmmm.thepitremake.managers.other.*;
 import me.stevemmmmm.thepitremake.perks.Vampire;
 import me.stevemmmmm.thepitremake.world.AntiFall;
 import me.stevemmmmm.thepitremake.world.AntiFire;
@@ -210,6 +187,8 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
             this.getCommand("pitabout").setExecutor(new PitAboutCommand());
             this.getCommand("givefreshitem").setExecutor(new GiveFreshItemCommand());
             this.getCommand("giveprot").setExecutor(new GiveProtCommand());
+            getCommand("givearch").setExecutor(new GiveArchCommand());
+            getCommand("givegolden").setExecutor(new GiveGoldenCommand());
             this.getCommand("setgold").setExecutor(new SetGoldCommand());
             this.getCommand("givebread").setExecutor(new GiveBreadCommand());
             this.getCommand("givearrows").setExecutor(new GiveArrowCommand());
@@ -365,7 +344,9 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
        	 new Revengeance(),
        	 new Hemorrhage(),
          new Shark(),
-         new SpeedyKill()
+         new SpeedyKill(),
+         new Guardian(),
+         new Royalty()
     	};
     
     private void registerEnchants() {

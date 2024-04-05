@@ -3,6 +3,12 @@ main: me.stevemmmmm.thepitremake.core.Main
 version: v1.0
 depend: [ServerCore, ProtocolLib, PlaceholderAPI, ShowItem]
 commands:
+  givearch:
+    description: Gives Archangel Chestplate
+    usage: /givearch
+  givegolden:
+    description: Gives Golden Helmet
+    usage: /givegolden
   pitenchant:
     description: Use it to enchant some weapons xD xD
     usage: /pitenchant

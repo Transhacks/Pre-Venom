@@ -16,6 +16,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UnenchantCommand implements CommandExecutor, TabCompleter {
+	
+    private void sendErrorMessage(Player player, String message) {
+        player.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "WHOOPS!" + ChatColor.GRAY + " " + message);
+    }
+    
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -35,28 +40,28 @@ public class UnenchantCommand implements CommandExecutor, TabCompleter {
         String enchantName = args[0];
         CustomEnchant customEnchant = getCustomEnchant(enchantName);
         if (customEnchant == null) {
-            player.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "WHOOPS!" + ChatColor.GRAY + " This enchant does not exist!");
+        	sendErrorMessage(player, " This enchant does not exist!");
             return true;
         }
 
         ItemStack item = player.getInventory().getItemInHand();
         if (item.getType() == Material.AIR) {
-            player.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "WHOOPS!" + ChatColor.GRAY + " You are not holding anything!");
+        	sendErrorMessage(player, " You are not holding anything!");
             return true;
         }
 
         if (!isValidItemForEnchant(item.getType())) {
-            player.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "WHOOPS!" + ChatColor.GRAY + " You cannot enchant this item!");
+        	sendErrorMessage(player, " You cannot unenchant this item!");
             return true;
         }
 
         if (!CustomEnchantManager.getInstance().itemContainsEnchant(item, customEnchant)) {
-            player.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "WHOOPS!" + ChatColor.GRAY + " This item does not have the specified enchant!");
+        	sendErrorMessage(player, " This item does not have the specified enchant!");
             return true;
         }
 
         CustomEnchantManager.getInstance().removeEnchant(item, customEnchant);
-        player.sendMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + "NICE!" + ChatColor.GRAY + " You unenchanted the enchant successfully!");
+        sendErrorMessage(player," You unenchanted the enchant successfully!");
         player.updateInventory();
         return true;
     }
