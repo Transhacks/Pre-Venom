@@ -17,18 +17,12 @@ import me.stevemmmmm.thepitremake.managers.enchants.LoreBuilder;
 
 public class Protection extends CustomEnchant {
 
-	private final EnchantProperty<Float> damageReductionAmount = new EnchantProperty<>(0.04f, 0.06f, 0.1f);
-	
 	@EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (event.getDamager() instanceof Arrow && event.getEntity() instanceof Player) {
-                attemptEnchantExecution(((Player) event.getEntity()).getInventory().getLeggings(), event);
-            }
         }
 
     @Override
     public void applyEnchant(int level, Object... args) {
-        DamageManager.getInstance().reduceDamage(((EntityDamageByEntityEvent) args[0]), damageReductionAmount.getValueAtLevel(level));
     }
 
 	@Override

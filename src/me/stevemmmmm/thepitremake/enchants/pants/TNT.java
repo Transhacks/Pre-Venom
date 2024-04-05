@@ -13,7 +13,6 @@ public class TNT extends CustomEnchant {
 
     @Override
     public void applyEnchant(int paramInt, Object... paramVarArgs) {
-        // TODO: Implement TNT enchantment logic
     }
 
     @Override
