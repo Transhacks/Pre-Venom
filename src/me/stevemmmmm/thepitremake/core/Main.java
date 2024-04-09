@@ -151,6 +151,7 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
 
                 }
             }).start(4);
+            
             ConfigAPI.registerConfigWriteLocations(this, new HashMap<String, String>() {
                 {
                     this.put("Gold", "stats.gold");
@@ -159,74 +160,81 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
                     this.put("Levels", "stats.level");
                 }
             });
+            
             ConfigAPI.registerConfigWriter(GrindingSystem.getInstance());
             ConfigAPI.registerConfigReader(GrindingSystem.getInstance());
-            Logger log = Bukkit.getLogger();
+            
+            Logger log = Bukkit.getLogger();            
             log.info("------------------------------------------");
             log.info("The Hypixel Pit Remake by Stevemmmmm");
             log.info("------------------------------------------");
-            this.registerEnchants();
-            this.registerPerks();
-            this.getServer().getPluginManager().registerEvents(new GameUtility(), this);
-            this.getServer().getPluginManager().registerEvents(new ClearArrows(), this);
-            this.getServer().getPluginManager().registerEvents(new AntiFall(), this);
-            this.getServer().getPluginManager().registerEvents(new AutoRespawn(), this);
-            this.getServer().getPluginManager().registerEvents(new PlayerUtility(), this);
-            this.getServer().getPluginManager().registerEvents(new DeveloperUpdates(), this);
-            this.getServer().getPluginManager().registerEvents(new WorldProtection(), this);
-            this.getServer().getPluginManager().registerEvents(RegionManager.getInstance(), this);
+            
+            registerEnchants();
+            registerPerks();
+            
+            getServer().getPluginManager().registerEvents(new GameUtility(), this);
+            getServer().getPluginManager().registerEvents(new ClearArrows(), this);
+            getServer().getPluginManager().registerEvents(new AntiFall(), this);
+            getServer().getPluginManager().registerEvents(new AutoRespawn(), this);
+            getServer().getPluginManager().registerEvents(new PlayerUtility(), this);
+            getServer().getPluginManager().registerEvents(new DeveloperUpdates(), this);
+            getServer().getPluginManager().registerEvents(new WorldProtection(), this);
+            getServer().getPluginManager().registerEvents(RegionManager.getInstance(), this);
             getServer().getPluginManager().registerEvents(new ServerMOTDInitializer(this), this);
-            this.getServer().getPluginManager().registerEvents(new ChatManagement(), this);
-            this.getServer().getPluginManager().registerEvents(new TogglePvPCommand(), this);
-            this.getServer().getPluginManager().registerEvents(new AntiFire(), this);
-            this.getServer().getPluginManager().registerEvents(new Death(), this);
-            this.getServer().getPluginManager().registerEvents(new LivesSystem(), this);
-            this.getServer().getPluginManager().registerEvents(new KillAnnouncementCommand(), this);
-            this.getCommand("pitenchant").setExecutor(new EnchantCommand());
-            this.getCommand("mysticenchants").setExecutor(new MysticEnchantsCommand());
-            this.getCommand("pitabout").setExecutor(new PitAboutCommand());
-            this.getCommand("givefreshitem").setExecutor(new GiveFreshItemCommand());
-            this.getCommand("giveprot").setExecutor(new GiveProtCommand());
+            getServer().getPluginManager().registerEvents(new ChatManagement(), this);
+            getServer().getPluginManager().registerEvents(new TogglePvPCommand(), this);
+            getServer().getPluginManager().registerEvents(new AntiFire(), this);
+            getServer().getPluginManager().registerEvents(new Death(), this);
+            getServer().getPluginManager().registerEvents(new LivesSystem(), this);
+            getServer().getPluginManager().registerEvents(new KillAnnouncementCommand(), this);
+            
+            getCommand("pitenchant").setExecutor(new EnchantCommand());
+            getCommand("mysticenchants").setExecutor(new MysticEnchantsCommand());
+            getCommand("pitabout").setExecutor(new PitAboutCommand());
+            getCommand("givefreshitem").setExecutor(new GiveFreshItemCommand());
+            getCommand("giveprot").setExecutor(new GiveProtCommand());
             getCommand("givearch").setExecutor(new GiveArchCommand());
             getCommand("givegolden").setExecutor(new GiveGoldenCommand());
-            this.getCommand("setgold").setExecutor(new SetGoldCommand());
-            this.getCommand("givebread").setExecutor(new GiveBreadCommand());
-            this.getCommand("givearrows").setExecutor(new GiveArrowCommand());
-            this.getCommand("giveobsidian").setExecutor(new GiveObsidianCommand());
-            this.getCommand("unenchant").setExecutor(new UnenchantCommand());
-            this.getCommand("togglepvp").setExecutor(new TogglePvPCommand());
-            this.getCommand("selectworld").setExecutor(new SelectWorldCommand());
-            this.getCommand("pithelp").setExecutor(new PitHelpCommand());
-            this.getCommand("giveegg").setExecutor(new GiveEggCommand());
-            this.getCommand("mutechat").setExecutor(new MuteChatCommand());
-            this.getCommand("setlevel").setExecutor(new SetLevelCommand());
-            this.getCommand("setprestige").setExecutor(new SetPrestigeCommand());
-            this.getCommand("gambleimmunity").setExecutor(new GambleImmunityCommand());
-            this.getCommand("streak").setExecutor(new StreakCommand());
-            this.getCommand("killannouncements").setExecutor(new KillAnnouncementCommand());
-            this.getCommand("ka").setExecutor(new KillAnnouncementCommand());
-            this.getCommand("setplayerhealth").setExecutor(new SetPlayerHealthCommand());
-            this.getCommand("nick").setExecutor(new NickCommand());
+            getCommand("setgold").setExecutor(new SetGoldCommand());
+            getCommand("givebread").setExecutor(new GiveBreadCommand());
+            getCommand("givearrows").setExecutor(new GiveArrowCommand());
+            getCommand("giveobsidian").setExecutor(new GiveObsidianCommand());
+            getCommand("unenchant").setExecutor(new UnenchantCommand());
+            getCommand("togglepvp").setExecutor(new TogglePvPCommand());
+            getCommand("selectworld").setExecutor(new SelectWorldCommand());
+            getCommand("pithelp").setExecutor(new PitHelpCommand());
+            getCommand("giveegg").setExecutor(new GiveEggCommand());
+            getCommand("mutechat").setExecutor(new MuteChatCommand());
+            getCommand("setlevel").setExecutor(new SetLevelCommand());
+            getCommand("setprestige").setExecutor(new SetPrestigeCommand());
+            getCommand("gambleimmunity").setExecutor(new GambleImmunityCommand());
+            getCommand("streak").setExecutor(new StreakCommand());
+            getCommand("killannouncements").setExecutor(new KillAnnouncementCommand());
+            getCommand("ka").setExecutor(new KillAnnouncementCommand());
+            getCommand("setplayerhealth").setExecutor(new SetPlayerHealthCommand());
+            getCommand("nick").setExecutor(new NickCommand());
             SpawnCommand spawnCommand = new SpawnCommand();
-            this.getCommand("spawn").setExecutor(spawnCommand);
-            this.getCommand("respawn").setExecutor(spawnCommand);
+            getCommand("spawn").setExecutor(spawnCommand);
+            getCommand("respawn").setExecutor(spawnCommand);
             getCommand("reloadcommand").setExecutor(new Reload(this));
-            this.getServer().getPluginManager().registerEvents(new MysticWell(), this);
-            this.getServer().getPluginManager().registerEvents(PitScoreboardManager.getInstance(), this);
-            this.getServer().getPluginManager().registerEvents(DuelingManager.getInstance(), this);
-            this.getServer().getPluginManager().registerEvents(DamageIndicator.getInstance(), this);
-            this.getServer().getPluginManager().registerEvents(CombatManager.getInstance(), this);
-            this.getServer().getPluginManager().registerEvents(DamageManager.getInstance(), this);
-            this.getServer().getPluginManager().registerEvents(BowManager.getInstance(), this);
-            this.getServer().getPluginManager().registerEvents(new LevelChatFormatting(), this);
-            this.getServer().getPluginManager().registerEvents(new Bread(), this);
-            this.getServer().getPluginManager().registerEvents(new FirstAidEgg(this), this);
-            this.getServer().getPluginManager().registerEvents(GrindingSystem.getInstance(), this);
-            this.getServer().getPluginManager().registerEvents(Obsidian.getInstance(), this);
-            this.getServer().getPluginManager().registerEvents(new StopLiquidFlow(), this);
-            this.getServer().getPluginManager().registerEvents(WorldSelection.getInstance(), this);
-            this.getServer().getPluginManager().registerEvents(EnderChest.getInstance(), this);
-            this.getServer().getPluginManager().registerEvents(this, this);
+            
+            getServer().getPluginManager().registerEvents(new MysticWell(), this);
+            getServer().getPluginManager().registerEvents(PitScoreboardManager.getInstance(), this);
+            getServer().getPluginManager().registerEvents(DuelingManager.getInstance(), this);
+            getServer().getPluginManager().registerEvents(DamageIndicator.getInstance(), this);
+            getServer().getPluginManager().registerEvents(CombatManager.getInstance(), this);
+            getServer().getPluginManager().registerEvents(DamageManager.getInstance(), this);
+            getServer().getPluginManager().registerEvents(BowManager.getInstance(), this);
+            getServer().getPluginManager().registerEvents(new LevelChatFormatting(), this);
+            getServer().getPluginManager().registerEvents(new Bread(), this);
+            getServer().getPluginManager().registerEvents(new FirstAidEgg(this), this);
+            getServer().getPluginManager().registerEvents(GrindingSystem.getInstance(), this);
+            getServer().getPluginManager().registerEvents(Obsidian.getInstance(), this);
+            getServer().getPluginManager().registerEvents(new StopLiquidFlow(), this);
+            getServer().getPluginManager().registerEvents(WorldSelection.getInstance(), this);
+            getServer().getPluginManager().registerEvents(EnderChest.getInstance(), this);
+            getServer().getPluginManager().registerEvents(this, this);
+            
         }
     }
 
@@ -272,81 +280,92 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
     }
     
     CustomEnchant[] enchantmentsToRegister = {
-       	 new Assassin(),
-       	 new BeatTheSpammers(),
-       	 new Billionaire(),
-       	 new BooBoo(),
-       	 new Bruiser(),
-       	 new BulletTime(),
-       	 new Chipping(),
-       	 new ComboDamage(),
-       	 new ComboHeal(),
-       	 new ComboStun(),
-       	 new ComboSwift(),
-       	 new CounterJanitor(),
-       	 new Cricket(),
-       	 new CriticallyFunky(),
-       	 new Crush(),
-       	 new DevilChicks(),
-       	 new DiamondStomp(),
-       	 new DoubleJump(),
-       	 new Duelist(),
-       	 new EscapePod(),
-       	 new Executioner(),
-       	 new Explosive(),
-       	 new FancyRaider(),
-       	 new Fletching(),
-       	 new FractionalReserve(),
-       	 new Frostbite(),
-       	 new Gamble(),
-       	 new GottaGoFast(),
-       	 new Grasshopper(),
-       	 new Guts(),
-       	 new Healer(),
-       	 new Hearts(),
-       	 new Jumpspammer(),
-       	 new KingBuster(),
-       	 new NotGladiator(),
-       	 new LastStand(),
-       	 new Lifesteal(),
-       	 new LuckyShot(),
-       	 new Megalongbow(),
-       	 new Mirror(),
-       	 new PainFocus(),
-       	 new Parasite(),
-       	 new Peroxide(),
-       	 new Perun(),
-       	 new Pitpocket(),
-       	 new Prick(),
-       	 new Protection(),
-       	 new Pullbow(),
-       	 new Punisher(),
-       	 new PushComesToShove(),
-       	 new RespawnAbsorption(),
-       	 new Revitalize(),
-       	 new RingArmor(),
-       	 new Robinhood(),
-       	 new Sharp(),
-       	 new Solitude(),
-       	 new SpeedyHit(),
-       	 new SprintDrain(),
-       	 new Sweaty(),
-       	 new Telebow(),
-       	 new ThePunch(),
-       	 new TrueShot(),
-       	 new Volley(),
-       	 new Wasp(),
-       	 new TNT(),
-       	 new BountyReaper(),
-       	 new GoldAndBoosted(),
-       	 new Berserker(),
-       	 new Knockback(),
-       	 new Revengeance(),
-       	 new Hemorrhage(),
-         new Shark(),
-         new SpeedyKill(),
-         new Guardian(),
-         new Royalty()
+    			
+    		//Pants enchants
+    		new Assassin(),
+    		new BooBoo(),
+    		new Cricket(),
+    		new CriticallyFunky(),
+    		new DoubleJump(),
+    		new EscapePod(),
+    		new FractionalReserve(),
+    		new GottaGoFast(),
+    		new Hearts(),
+    		new LastStand(),
+    		new Mirror(),
+    		new NotGladiator(),
+    		new Peroxide(),
+    		new Prick(),
+    		new Protection(),
+    		new RespawnAbsorption(),
+    		new Revitalize(),
+    		new RingArmor(),
+    		new Solitude(),
+    		new TNT(),
+    		
+    		// Bow Enchants
+    		new Chipping(),
+    		new DevilChicks(),
+    		new Explosive(),
+    		new Fletching(),
+    		new Jumpspammer(),
+    		new LuckyShot(),
+    		new Megalongbow(),
+    		new Parasite(),
+    		new Pullbow(),
+    		new PushComesToShove(),
+    		new Robinhood(),
+    		new SprintDrain(),
+    		new Telebow(),
+    		new TrueShot(),
+    		new Volley(),
+    		new Wasp(),
+
+    		// Sword Enchants
+    		new BeatTheSpammers(),
+    		new Berserker(),
+    		new Billionaire(),
+    		new BountyReaper(),
+    		new Bruiser(),
+    		new BulletTime(),
+    		new ComboDamage(),
+    		new ComboHeal(),
+    		new ComboStun(),
+    		new ComboSwift(),
+    		new CounterJanitor(),
+    		new Crush(),
+    		new DiamondStomp(),
+    		new Duelist(),
+    		new Executioner(),
+    		new FancyRaider(),
+    		new Frostbite(),
+    		new Gamble(),
+    		new GoldAndBoosted(),
+    		new Grasshopper(),
+    		new Guts(),
+    		new Healer(),
+    		new Hemorrhage(),
+    		new KingBuster(),
+    		new Knockback(),
+    		new Lifesteal(),
+    		new PainFocus(),
+    		new Perun(),
+    		new Pitpocket(),
+    		new Punisher(),
+    		new Revengeance(),
+    		new Shark(),
+    		new Sharp(),
+    		new SpeedyHit(),
+    		new SpeedyKill(),
+    		new ThePunch(),
+    		
+    		// Universal enchants
+    		
+    		new Sweaty(),
+    		
+    		// Special enchants
+    		new Guardian(),
+    		new Royalty()
     	};
     
     private void registerEnchants() {
