@@ -361,7 +361,15 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
     		
     		// Universal enchants
     		
+    		new CriticallyRich(),
+    		new GoldBoost(),
+    		new GoldBump(),
+    		new Moctezuma(),
+    		new PantsRadar(),
+    		new StrikeGold(),
     		new Sweaty(),
+    		new XPBoost(),
+    		new XPBump(),
     		
     		// Special enchants
     		new Guardian(),

@@ -147,19 +147,22 @@ public class EnchantCommand implements TabExecutor {
                     "Bullettime", "Combodamage", "Painfocus", "Kingbuster", "Punisher", "Comboswift", "Hemorrhage",
                     "Bruiser", "Frostbite", "Executioner", "Beatthespammers", "Comboheal", "Sweaty", "Knockback",
                     "Sharp", "Gamble", "FancyRaider", "Grasshopper", "Guts", "Crush", "GoldAndBoosted", "Shark",
-                    "Punch", "Counter-janitor", "Pitpocket", "Duelist", "Speedyhit", "BountyReaper", "Revengeance"
+                    "Punch", "Counter-janitor", "Pitpocket", "Duelist", "Speedyhit", "BountyReaper", "Revengeance",
+                    "XPBoost", "XPBump", "GoldBoost", "GoldBump", "Moctezuma", "CriticallyRich", "PantsRadar"
             ));
         } else if (player.getInventory().getItemInHand().getType() == Material.BOW) {
             options.addAll(List.of(
                     "Robinhood", "Telebow", "Megalongbow", "Volley", "LuckyShot", "DevilChicks",
                     "Explosive", "Wasp", "Parasite", "Pcts", "Chipping", "Fletching", "SprintDrain",
-                    "Jumpspammer", "Pullbow", "TrueShot", "Sweaty"
+                    "Jumpspammer", "Pullbow", "TrueShot", "Sweaty",
+                    "XPBoost", "XPBump", "GoldBoost", "GoldBump", "Moctezuma", "CriticallyRich", "PantsRadar"
             ));
         } else if (player.getInventory().getItemInHand().getType() == Material.LEATHER_LEGGINGS) {
             options.addAll(List.of(
                     "Mirror", "Solitude", "Assassin", "Critfunky", "LastStand", "Peroxide", "Sweaty",
                     "BooBoo", "Frac", "RingArmor", "Protection", "Cricket", "Revitalize", "Prick",
-                    "EscapePod", "Absorption", "Hearts", "NotGladiator", "Doublejump", "TNT"
+                    "EscapePod", "Absorption", "Hearts", "NotGladiator", "Doublejump", "TNT",
+                    "XPBoost", "XPBump", "GoldBoost", "GoldBump", "Moctezuma", "CriticallyRich", "PantsRadar"
             ));
         }
         if (args.length == 1) {
