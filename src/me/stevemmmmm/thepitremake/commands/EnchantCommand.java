@@ -61,6 +61,11 @@ public class EnchantCommand implements TabExecutor {
                         sendErrorMessage(player, "You cannot enchant this item!");
                         return true;
                     }
+                    
+                    if (item.getType() == Material.LEATHER_BOOTS) {
+                        sendErrorMessage(player, "You cannot enchant this item!");
+                        return true;
+                    }
 
                     if (args.length < 2) {
                         sendErrorMessage(player, "You did not specify an enchantment level!");

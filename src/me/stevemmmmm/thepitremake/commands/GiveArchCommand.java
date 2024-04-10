@@ -25,7 +25,7 @@ public class GiveArchCommand implements CommandExecutor {
 
                  meta.setDisplayName(ChatColor.AQUA + "Archangel Chestplate");
                  meta.setLore(new LoreBuilder()
-                     .write(ChatColor.GRAY + "Lives: " + ChatColor.GREEN + "12" + ChatColor.GRAY + "/12").next()
+                     .write(ChatColor.GRAY + "Lives: " + ChatColor.GREEN + "100" + ChatColor.GRAY + "/100").next()
                      .write("").next()
                      .write(ChatColor.BLUE + "Guardian ").next()
                      .write(ChatColor.GRAY + "Recieve " + ChatColor.BLUE + "-10% " + ChatColor.GRAY + "damage").next()

@@ -25,7 +25,7 @@ public class GiveGoldenCommand implements CommandExecutor {
 
 	                meta.setDisplayName(ChatColor.GOLD + "Golden Helmet");
 	                meta.setLore(new LoreBuilder()
-	                    .write(ChatColor.GRAY + "Lives: " + ChatColor.GREEN + "5" + ChatColor.GRAY + "/5").next()
+	                    .write(ChatColor.GRAY + "Lives: " + ChatColor.GREEN + "50" + ChatColor.GRAY + "/50").next()
 	                    .write("").next()
 	                    .write(ChatColor.BLUE + "Royalty ").next()
 	                    .write(ChatColor.GRAY + "Earn " + ChatColor.AQUA + "+10% XP" + ChatColor.GRAY + " from kills").next()

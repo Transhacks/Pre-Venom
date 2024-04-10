@@ -58,7 +58,7 @@ public class LivesSystem implements Listener {
 		    	ItemMeta armorMeta = armorPiece.getItemMeta();
 		    	if (armorMeta != null && armorMeta.getDisplayName() != null) {
 		    		ArrayList<String> displayName = new ArrayList<>(Arrays.asList(ChatColor.stripColor(armorMeta.getDisplayName()).split(" ")));
-		    		if (displayName.contains("Tier") || displayName.contains("Golden") || displayName.contains("Archangel")) {
+		    		if (displayName.contains("Tier") || displayName.contains("Golden") || displayName.contains("Armageddon") || displayName.contains("Archangel")) {
 	                	CustomEnchantManager.getInstance().setItemLives(armorPiece, CustomEnchantManager.getInstance().getItemLives(armorPiece) - 1);
 	                	
 	                	destroyItem(armorPiece, player, playerInventory, i, true);
