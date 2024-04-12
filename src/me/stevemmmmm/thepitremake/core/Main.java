@@ -196,6 +196,7 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
             getCommand("givearmageddon").setExecutor(new GiveArmageddonCommand());
             getCommand("givearch").setExecutor(new GiveArchCommand());
             getCommand("givegolden").setExecutor(new GiveGoldenCommand());
+            getCommand("givefeather").setExecutor(new GiveFeatherCommand());
             getCommand("setgold").setExecutor(new SetGoldCommand());
             getCommand("givebread").setExecutor(new GiveBreadCommand());
             getCommand("givearrows").setExecutor(new GiveArrowCommand());

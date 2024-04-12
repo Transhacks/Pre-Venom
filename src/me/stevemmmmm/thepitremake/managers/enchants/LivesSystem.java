@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -70,6 +71,26 @@ public class LivesSystem implements Listener {
 	
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
-		removeItemLives(event.getEntity());
+		Player player = event.getEntity();
+		PlayerInventory playerInventory = player.getInventory();
+		
+		for (int i = 0; i < 9; i++) { 
+			ItemStack item = playerInventory.getItem(i);
+			if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName() && ChatColor.stripColor(item.getItemMeta().getDisplayName()).equals("Funky Feather")) {
+				if (item.getAmount() > 1) {
+					item.setAmount(item.getAmount() - 1);
+					playerInventory.setItem(i, item);
+				} else {
+					playerInventory.setItem(i, null);
+				}
+				
+				player.playSound(player.getLocation(), Sound.BAT_TAKEOFF, 2, 2F);
+				player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&3&lFUNKY FEATHER!&7 Inventory protected!"));
+				
+				return; 
+			}
+		}
+		
+		removeItemLives(player);
 	}
 }

@@ -3,6 +3,9 @@ main: me.stevemmmmm.thepitremake.core.Main
 version: v1.0
 depend: [ServerCore, ProtocolLib, PlaceholderAPI, ShowItem]
 commands:
+  givefeather:
+    description: Gives Funky Feather
+    usage: /givefeather
   givearmageddon:
     description: Gives Armageddon Boots
     usage: /givearmageddon
