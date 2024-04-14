@@ -11,7 +11,7 @@ import me.stevemmmmm.thepitremake.managers.enchants.CustomEnchant;
 import me.stevemmmmm.thepitremake.managers.enchants.EnchantGroup;
 import me.stevemmmmm.thepitremake.managers.enchants.LoreBuilder;
 
-public class Protection extends CustomEnchant {
+public class PurpleGold extends CustomEnchant {
 
 	@EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
@@ -23,22 +23,31 @@ public class Protection extends CustomEnchant {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return "Protection";
+		return "Purple Gold";
 	}
 
 	@Override
 	public String getEnchantReferenceName() {
-		// TODO Auto-generated method stub
-		return "Protection";
+		return "PurpleGold";
 	}
 
 	@Override
 	public ArrayList<String> getDescription(int level) {
-		return new LoreBuilder()
-        		.declareVariable("-4%", "-6%", "-10%")
-                .write("Receive ").writeVariable(ChatColor.BLUE, 0, level).write(" damage")
-                .build();
+	    LoreBuilder builder = new LoreBuilder();
+
+	    builder.declareVariable("+7g", "+11g", "+15g");  
+	    builder.declareVariable("", "2", "3");
+
+	    String baseText = "Gain ";
+
+	    if (level == 1) {
+	        builder.write(baseText).writeVariable(ChatColor.GOLD, 0, level).resetColor().write(" from breaking").next()
+	               .write("obsidian");
+	    } else if (level > 1 ) {
+	        builder.write(baseText).writeVariable(ChatColor.GOLD, 0, level).write(" and ").setColor(ChatColor.RED).write("Regen III").next()
+	        	   .resetColor().write("(").writeVariable(1, level).write("s) from breaking obsidian");
+	    }
+	    return builder.build();
 	}
 
 	@Override

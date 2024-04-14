@@ -11,7 +11,7 @@ import me.stevemmmmm.thepitremake.managers.enchants.CustomEnchant;
 import me.stevemmmmm.thepitremake.managers.enchants.EnchantGroup;
 import me.stevemmmmm.thepitremake.managers.enchants.LoreBuilder;
 
-public class Protection extends CustomEnchant {
+public class DavidandGoliath extends CustomEnchant {
 
 	@EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
@@ -23,21 +23,20 @@ public class Protection extends CustomEnchant {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return "Protection";
+		return "David and Goliath";
 	}
 
 	@Override
 	public String getEnchantReferenceName() {
-		// TODO Auto-generated method stub
-		return "Protection";
+		return "DavidandGoliath";
 	}
 
 	@Override
 	public ArrayList<String> getDescription(int level) {
 		return new LoreBuilder()
-        		.declareVariable("-4%", "-6%", "-10%")
-                .write("Receive ").writeVariable(ChatColor.BLUE, 0, level).write(" damage")
+        		.declareVariable("-15%", "-25%", "-40%")
+                .write("Receive ").writeVariable(ChatColor.BLUE, 0, level).write(" damage from").next()
+                .write("players with a bounty")
                 .build();
 	}
 

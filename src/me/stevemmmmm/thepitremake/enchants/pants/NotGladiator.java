@@ -69,7 +69,7 @@ public class NotGladiator extends CustomEnchant {
     public ArrayList<String> getDescription(int level) {
         return new LoreBuilder()
                 .declareVariable("-1%", "-1.5%", "-2%")
-                .write("Recieve ").setColor(ChatColor.BLUE).writeVariable(0, level).resetColor().write(" damage per nearby ").next()
+                .write("Receive ").setColor(ChatColor.BLUE).writeVariable(0, level).resetColor().write(" damage per nearby ").next()
                 .write("player (max 10 players)")
                 .build();
     }

@@ -11,7 +11,7 @@ import me.stevemmmmm.thepitremake.managers.enchants.CustomEnchant;
 import me.stevemmmmm.thepitremake.managers.enchants.EnchantGroup;
 import me.stevemmmmm.thepitremake.managers.enchants.LoreBuilder;
 
-public class Protection extends CustomEnchant {
+public class Pebble extends CustomEnchant {
 
 	@EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
@@ -23,22 +23,27 @@ public class Protection extends CustomEnchant {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return "Protection";
+		return "Pebble";
 	}
 
 	@Override
 	public String getEnchantReferenceName() {
-		// TODO Auto-generated method stub
-		return "Protection";
+		return "Pebble";
 	}
 
 	@Override
 	public ArrayList<String> getDescription(int level) {
-		return new LoreBuilder()
-        		.declareVariable("-4%", "-6%", "-10%")
-                .write("Receive ").writeVariable(ChatColor.BLUE, 0, level).write(" damage")
-                .build();
+	    LoreBuilder builder = new LoreBuilder();
+
+	    builder.declareVariable("+10g", "+20g", "+30g");  
+
+	    if (level < 3) {
+	        builder.write("Picked up gold rewards ").writeVariable(ChatColor.GOLD, 0, level); 
+	    } else if (level == 3) {
+	        builder.write("Picked up gold grants ").setColor(ChatColor.GOLD).write("1❤").resetColor().write(" and").next()
+	        .write("rewards ").writeVariable(ChatColor.GOLD, 0, level); 
+	    }
+	    return builder.build();
 	}
 
 	@Override

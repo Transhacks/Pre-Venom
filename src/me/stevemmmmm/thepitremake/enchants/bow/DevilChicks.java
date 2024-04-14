@@ -106,12 +106,19 @@ public class DevilChicks extends CustomEnchant {
 
     @Override
     public ArrayList<String> getDescription(int level) {
-        return new LoreBuilder()
-                .writeOnlyIf(level == 1, "Arrows spawn with explosive chicken.")
-                .writeOnlyIf(level == 2, "Arrows spawn many explosive chickens.")
-                .writeOnlyIf(level == 3, "Arrows spawn too many explosive chickens.")
-                .build();
+        LoreBuilder builder = new LoreBuilder();
+
+        if (level == 1) {
+            builder.write("Arrows spawn an explosive chicken");
+        } else if (level == 2) {
+            builder.write("Arrows spawn many explosive").next().write("chickens");
+        } else if (level == 3) {
+            builder.write("Arrows spawn too many explosive").next().write("chickens");
+        }
+
+        return builder.build();
     }
+
 
     @Override
     public boolean isDisabledOnPassiveWorld() {

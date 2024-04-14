@@ -31,7 +31,7 @@ public class Cricket extends CustomEnchant {
 	public ArrayList<String> getDescription(int level) {
 		return new LoreBuilder()
 				.declareVariable("-5%", "-7%", "-15%")
-				.write("Recieve ").setColor(ChatColor.BLUE).writeVariable(0, level).resetColor().write(" damage when you or").next()
+				.write("Receive ").setColor(ChatColor.BLUE).writeVariable(0, level).resetColor().write(" damage when you or").next()
 				.write("your victims are standing on grass").next()
 				.setColor(ChatColor.GREEN).write("Perma ").setColor(ChatColor.RED).write("Regen I ").setColor(ChatColor.GREEN).write("on grass!")
 				.build();
