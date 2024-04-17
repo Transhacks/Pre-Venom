@@ -45,7 +45,7 @@ import me.stevemmmmm.thepitremake.game.StopLiquidFlow;
 import me.stevemmmmm.thepitremake.game.WorldSelection;
 import me.stevemmmmm.thepitremake.game.duels.DuelingManager;
 import me.stevemmmmm.thepitremake.game.duels.GameUtility;
-import me.stevemmmmm.thepitremake.game.killstreaks.Death;
+import me.stevemmmmm.thepitremake.game.killstreaks.Killstreak;
 import me.stevemmmmm.thepitremake.managers.enchants.LivesSystem;
 import me.stevemmmmm.thepitremake.managers.enchants.BowManager;
 import me.stevemmmmm.thepitremake.managers.enchants.CustomEnchant;
@@ -184,7 +184,7 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
             getServer().getPluginManager().registerEvents(new ChatManagement(), this);
             getServer().getPluginManager().registerEvents(new TogglePvPCommand(), this);
             getServer().getPluginManager().registerEvents(new AntiFire(), this);
-            getServer().getPluginManager().registerEvents(new Death(), this);
+            getServer().getPluginManager().registerEvents(new Killstreak(), this);
             getServer().getPluginManager().registerEvents(new LivesSystem(), this);
             getServer().getPluginManager().registerEvents(new KillAnnouncementCommand(), this);
             

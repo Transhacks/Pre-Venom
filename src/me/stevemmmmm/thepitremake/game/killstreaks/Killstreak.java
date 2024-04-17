@@ -1,61 +1,51 @@
 package me.stevemmmmm.thepitremake.game.killstreaks;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class Killstreak {
-    private static Killstreak instance;
-    private final Map<UUID, Integer> killStreakMap = new HashMap<>();
+public class Killstreak implements Listener {
 
-    // static initialization block
-    static {
-        instance = new Killstreak();
+    private Map<UUID, Integer> killCounts;
+
+    public Killstreak() {
+        this.killCounts = new HashMap<>();
     }
 
-    // private constructor to prevent external instantiation
-    private Killstreak() {}
+    public void incrementKillCount(Player player) {
+        UUID playerId = player.getUniqueId();
+        int currentKills = killCounts.getOrDefault(playerId, 0);
+        killCounts.put(playerId, currentKills + 1);
 
-    /**
-     * Returns the instance of this class
-     * @return the singleton instance of Killstreak
-     */
-    public static Killstreak getInstance() {
-        return instance;
+        checkStreak(player);
     }
-    /**
-     * Get kills from hashmap with key 'UUID'
-     * @param uuid
-     * @return
-     */
- 
-    public int getKills(final UUID uuid){
-        if(!killStreakMap.containsKey(uuid)) return 0;
-        return killStreakMap.get(uuid);
-    }
- 
-    /**
-     * Add kill into hashmap with key 'uuid'
-     * @param uuid
-     */
- 
-    public void addKill(final UUID uuid) {
-        if (killStreakMap.containsKey(uuid)) {
-            killStreakMap.put(uuid, getKills(uuid) + 1);
-        } else {
-            killStreakMap.put(uuid, 1);
+
+    private void checkStreak(Player player) {
+        UUID playerId = player.getUniqueId();
+        int currentKills = killCounts.getOrDefault(playerId, 0);
+
+        if (currentKills % 5 == 0) {
+            String message = ChatColor.translateAlternateColorCodes('&',
+                    "&c&lSTREAK! &r&7of &c" + currentKills + "&r&7 kills by " + player.getName());
+
+            Bukkit.broadcastMessage(message);
         }
     }
- 
-    /**
-     * Reset kills under key 'UUID'
-     * @param uuid
-     */
- 
-    public void resetKills(final UUID uuid){
-        if(!killStreakMap.containsKey(uuid)) return;
-        killStreakMap.remove(uuid);
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        UUID playerId = player.getUniqueId();
+
+        if (killCounts.containsKey(playerId)) {
+            killCounts.remove(playerId);
+        }
     }
- 
- 
 }
