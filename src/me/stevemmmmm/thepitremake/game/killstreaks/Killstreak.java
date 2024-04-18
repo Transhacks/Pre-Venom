@@ -9,12 +9,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import me.stevemmmmm.permissions.core.PermissionsManager;
 import me.stevemmmmm.permissions.core.Rank;
+import me.stevemmmmm.thepitremake.core.Main;
 import me.stevemmmmm.thepitremake.managers.other.GrindingSystem;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -84,39 +87,40 @@ public class Killstreak implements Listener {
     }
 
     private void playKillSound(Player player, int currentKills) {
-        Sound sound;
-        float pitch;
+
+        float[] pitches;
 
         switch (currentKills) {
-        
             case 1:
-                sound = Sound.ORB_PICKUP;
-                pitch = 1.7936507f;
+                pitches = new float[] { 1.75f, 1.7936507f };
                 break;
             case 2:
-                sound = Sound.ORB_PICKUP;
-                pitch = 1.8253968f;
+                pitches = new float[] { 1.75f, 1.7936507f, 1.8253968f };
                 break;
             case 3:
-                sound = Sound.ORB_PICKUP;
-                pitch = 1.8730159f;
+                pitches = new float[] { 1.75f, 1.7936507f, 1.8253968f, 1.8730159f };
                 break;
             case 4:
-                sound = Sound.ORB_PICKUP;
-                pitch = 1.9047619f;
+                pitches = new float[] { 1.75f, 1.7936507f, 1.8253968f, 1.8730159f, 1.9047619f };
                 break;
             default:
-                if (currentKills > 4) {
-                    sound = Sound.ORB_PICKUP;
-                    pitch = 1.9523809f;
+            	if (currentKills > 4) {
+                pitches = new float[] { 1.75f, 1.7936507f, 1.8253968f, 1.8730159f, 1.9047619f, 1.95232009f };
                 } else {
-                    sound = Sound.ORB_PICKUP;
-                    pitch = 1.75f;
+                	pitches = new float[] {1.75f};
                 }
                 break;
         }
 
-        player.playSound(player.getLocation(), sound, 1, pitch);
+        int delay = 0;
+
+        for (float pitch : pitches) {
+            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.INSTANCE, () -> {
+                player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1, pitch);
+            }, delay);
+
+            delay += 2;
+        }
     }
 
     private void checkStreak(Player player) {
