@@ -184,7 +184,8 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
             getServer().getPluginManager().registerEvents(new ChatManagement(), this);
             getServer().getPluginManager().registerEvents(new TogglePvPCommand(), this);
             getServer().getPluginManager().registerEvents(new AntiFire(), this);
-            getServer().getPluginManager().registerEvents(new Killstreak(), this);
+            Killstreak killstreak = new Killstreak();
+            getServer().getPluginManager().registerEvents(killstreak, this);
             getServer().getPluginManager().registerEvents(new LivesSystem(), this);
             getServer().getPluginManager().registerEvents(new KillAnnouncementCommand(), this);
             
@@ -215,7 +216,7 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
             getCommand("ka").setExecutor(new KillAnnouncementCommand());
             getCommand("setplayerhealth").setExecutor(new SetPlayerHealthCommand());
             getCommand("nick").setExecutor(new NickCommand());
-            SpawnCommand spawnCommand = new SpawnCommand();
+            SpawnCommand spawnCommand = new SpawnCommand(killstreak);
             getCommand("spawn").setExecutor(spawnCommand);
             getCommand("respawn").setExecutor(spawnCommand);
             getCommand("reloadcommand").setExecutor(new Reload(this));

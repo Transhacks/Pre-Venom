@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 import me.stevemmmmm.permissions.core.PermissionsManager;
 import me.stevemmmmm.permissions.core.Rank;
@@ -145,13 +147,23 @@ public class Killstreak implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         UUID playerId = player.getUniqueId();
-
-        if (killCounts.containsKey(playerId)) {
-            killCounts.remove(playerId);
-        }
+        removeKillCount(playerId);
         if (player.getKiller() instanceof Player) {
             Player killer = player.getKiller();
             incrementKillCount(killer, player);
         }
     }
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        UUID playerId = player.getUniqueId();
+        removeKillCount(playerId);
+    }
+
+    public void removeKillCount(UUID playerId) {
+        if (killCounts.containsKey(playerId)) {
+            killCounts.remove(playerId);
+        }
+    }
+
 }
