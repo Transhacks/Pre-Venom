@@ -111,7 +111,6 @@ public class GrindingSystem implements Listener, ConfigWriter, ConfigReader {
             event.getEntity().sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "DEATH!");
         } else {
             DecimalFormat df = new DecimalFormat("##0.00");
-            event.getEntity().getKiller().sendMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + "KILL!" + ChatColor.GRAY + " on " + getInstance().getFormattedPlayerLevelWithoutPrestige(event.getEntity()) + " " + PermissionsManager.getInstance().getPlayerRank(event.getEntity()).getNameColor() + event.getEntity().getName() + ChatColor.AQUA + " +" + this.giveRandomXP(event.getEntity().getKiller()) + "XP" + ChatColor.GOLD + " +" + df.format(this.giveRandomGold(event.getEntity().getKiller())) + "g");
             event.getEntity().sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "DEATH! " + ChatColor.GRAY + "by " + this.getFormattedPlayerLevelWithoutPrestige(event.getEntity().getKiller()) + " " + PermissionsManager.getInstance().getPlayerRank(event.getEntity().getKiller()).getNameColor() + event.getEntity().getKiller().getName() + " " + ChatColor.YELLOW.toString() + ChatColor.BOLD + "VIEW RECAP");
             IChatBaseComponent chatTitle = ChatSerializer.a("{\"text\": \"" + ChatColor.RED + "YOU DIED" + "\",color:" + ChatColor.GOLD.name().toLowerCase() + "}");
             PacketPlayOutTitle title = new PacketPlayOutTitle(EnumTitleAction.TITLE, chatTitle);
@@ -120,7 +119,6 @@ public class GrindingSystem implements Listener, ConfigWriter, ConfigReader {
             ((CraftPlayer)event.getEntity()).getHandle().playerConnection.sendPacket(title);
             ((CraftPlayer)event.getEntity()).getHandle().playerConnection.sendPacket(length);
             this.updateLevel(event.getEntity().getKiller());
-            event.getEntity().getKiller().playSound(event.getEntity().getKiller().getLocation(), Sound.ORB_PICKUP, 1.0F, 1.75F);
             PacketPlayOutChat packet = new PacketPlayOutChat(ChatSerializer.a("{\"text\":\"" + PermissionsManager.getInstance().getPlayerRank(event.getEntity()).getNameColor() + event.getEntity().getName() + ChatColor.GREEN.toString() + ChatColor.BOLD + " KILL!" + "\"}"), (byte)2);
             ((CraftPlayer)event.getEntity().getKiller()).getHandle().playerConnection.sendPacket(packet);
             ++kills;

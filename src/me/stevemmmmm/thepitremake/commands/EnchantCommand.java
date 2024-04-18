@@ -148,26 +148,27 @@ public class EnchantCommand implements TabExecutor {
         List<String> options = new ArrayList<>();
         if (player.getInventory().getItemInHand().getType() == Material.GOLD_SWORD) {
             options.addAll(List.of(
-                    "Billionaire", "Healer", "Perun", "Combostun", "Lifesteal", "Diamondstomp", "Berserker", "Speedykill",
-                    "Bullettime", "Combodamage", "Painfocus", "Kingbuster", "Punisher", "Comboswift", "Hemorrhage",
-                    "Bruiser", "Frostbite", "Executioner", "Beatthespammers", "Comboheal", "Sweaty", "Knockback",
-                    "Sharp", "Gamble", "FancyRaider", "Grasshopper", "Guts", "Crush", "GoldAndBoosted", "Shark",
-                    "Punch", "Counter-janitor", "Pitpocket", "Duelist", "Speedyhit", "BountyReaper", "Revengeance",
-                    "XPBoost", "XPBump", "GoldBoost", "GoldBump", "Moctezuma", "CriticallyRich", "PantsRadar"
+                    "BeatTheSpammers", "Berserker", "Billionaire", "BountyReaper", "Bruiser", "BulletTime", "ComboDamage", "ComboHeal",
+                    "ComboStun", "ComboSwift", "CounterJanitor", "Crush", "DiamondStomp", "Duelist", "Executioner",
+                    "FancyRaider", "Frostbite", "Gamble", "GoldAndBoosted", "Grasshopper", "Guts", "Healer",
+                    "Hemorrhage", "KingBuster", "Knockback", "Lifesteal", "PainFocus", "Perun", "Pitpocket", "Punisher",
+                    "Revengeance", "Shark", "Sharp", "SpeedyHit", "Speedyhit", "SpeedyKill", "ThePunch",
+                    "CriticallyRich", "GoldBoost", "GoldBump", "Moctezuma", "StrikeGold", "Sweaty", "XPBoost", "XPBump"
             ));
         } else if (player.getInventory().getItemInHand().getType() == Material.BOW) {
             options.addAll(List.of(
-                    "Robinhood", "Telebow", "Megalongbow", "Volley", "LuckyShot", "DevilChicks",
-                    "Explosive", "Wasp", "Parasite", "Pcts", "Chipping", "Fletching", "SprintDrain",
-                    "Jumpspammer", "Pullbow", "TrueShot", "Sweaty",
-                    "XPBoost", "XPBump", "GoldBoost", "GoldBump", "Moctezuma", "CriticallyRich", "PantsRadar"
+                    "Chipping", "DevilChicks", "Explosive", "Fletching", "Jumpspammer", "LuckyShot",
+                    "Megalongbow", "Parasite", "Pullbow", "Pcts", "Robinhood", "SprintDrain", "Telebow",
+                    "TrueShot", "Volley", "Wasp", 
+                    "CriticallyRich", "GoldBoost", "GoldBump", "Moctezuma", "StrikeGold", "Sweaty", "XPBoost", "XPBump"
             ));
         } else if (player.getInventory().getItemInHand().getType() == Material.LEATHER_LEGGINGS) {
             options.addAll(List.of(
-                    "Mirror", "Solitude", "Assassin", "Critfunky", "LastStand", "Peroxide", "Sweaty",
-                    "BooBoo", "Frac", "RingArmor", "Protection", "Cricket", "Revitalize", "Prick",
-                    "EscapePod", "Absorption", "Hearts", "NotGladiator", "Doublejump", "TNT",
-                    "XPBoost", "XPBump", "GoldBoost", "GoldBump", "Moctezuma", "CriticallyRich", "PantsRadar"
+                    "Assassin", "Billy", "BooBoo", "Cricket", "CriticallyFunky", "DavidandGoliath", "DiamondAllergy",
+                    "DoubleJump", "EscapePod", "FractionalReserve", "GottaGoFast", "Hearts", "LastStand", "Lodbrok",
+                    "McSwimmer", "Mirror", "Negotiator", "NotGladiator", "Pebble", "Peroxide", "Prick", "Protection", 
+                    "PurpleGold", "RespawnAbsorption", "Revitalize", "RingArmor", "Selfcheckout", "Solitude", "TNT",
+                    "CriticallyRich", "GoldBoost", "GoldBump", "Moctezuma", "StrikeGold", "Sweaty", "XPBoost", "XPBump"
             ));
         }
         if (args.length == 1) {
