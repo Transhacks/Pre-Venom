@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package me.stevemmmmm.thepitremake.managers.other;
 
 import java.text.SimpleDateFormat;
@@ -10,12 +5,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.UUID;
-import me.confuser.killstreaks.KillStreaks;
-import me.confuser.killstreaks.storage.KillStreakPlayer;
-import me.confuser.killstreaks.storage.PlayerStorage;
 import me.stevemmmmm.permissions.core.PermissionsManager;
 import me.stevemmmmm.thepitremake.core.Main;
 import me.stevemmmmm.thepitremake.game.CombatManager;
+import me.stevemmmmm.thepitremake.game.killstreaks.Killstreak;
 import me.stevemmmmm.thepitremake.utils.RomanUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,17 +19,17 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 public class PitScoreboardManager implements Listener {
     private static PitScoreboardManager instance;
-    public PlayerStorage playerStorage;
     private final HashMap<UUID, Integer> scoreboardTasks = new HashMap();
     private final HashMap<UUID, Scoreboard> playerToScoreboard = new HashMap();
+    private final Killstreak killstreak;
 
     public PitScoreboardManager() {
+    	this.killstreak = new Killstreak();
     }
 
     public static PitScoreboardManager getInstance() {
@@ -69,116 +62,71 @@ public class PitScoreboardManager implements Listener {
 
     }
 
-    private void createScoreboard(Player player) {
-        Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective objective = this.getScoreboardObjective(board, player);
-        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        player.setScoreboard(board);
-    }
-
     private void updateScoreboard(Player player) {
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective objective = board.registerNewObjective("test", "dummy");
         objective.setDisplayName(ChatColor.YELLOW.toString() + ChatColor.BOLD + "FABIAN'S PIT SANDBOX");
+        
         int index = 11;
-        if (RomanUtils.getInstance().convertToRomanNumeral(GrindingSystem.getInstance().getPlayerPrestige(player)).equalsIgnoreCase("None")) {
-            --index;
-        }
+        boolean hasPrestige = !RomanUtils.getInstance().convertToRomanNumeral(GrindingSystem.getInstance().getPlayerPrestige(player)).equalsIgnoreCase("None");
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
         Date date = new Date();
-        Score dataAndInstance = objective.getScore(ChatColor.GRAY + simpleDateFormat.format(date) + ChatColor.DARK_GRAY + " mega17A");
-        dataAndInstance.setScore(index);
-        --index;
-        Score space1 = objective.getScore(" ");
-        space1.setScore(index);
-        --index;
-        Score level;
-        if (!RomanUtils.getInstance().convertToRomanNumeral(GrindingSystem.getInstance().getPlayerPrestige(player)).equalsIgnoreCase("None")) {
-            level = objective.getScore(ChatColor.WHITE + "Prestige: " + ChatColor.YELLOW + RomanUtils.getInstance().convertToRomanNumeral(GrindingSystem.getInstance().getPlayerPrestige(player)));
-            level.setScore(index);
-            --index;
+
+        objective.getScore(ChatColor.GRAY + dateFormat.format(date) + ChatColor.DARK_GRAY + " mega17A").setScore(index--);
+        objective.getScore(" ").setScore(index--);
+
+        if (hasPrestige) {
+            objective.getScore(ChatColor.WHITE + "Prestige: " + ChatColor.YELLOW + RomanUtils.getInstance().convertToRomanNumeral(GrindingSystem.getInstance().getPlayerPrestige(player))).setScore(index--);
         }
 
-        level = objective.getScore(ChatColor.WHITE + "Level: " + GrindingSystem.getInstance().getFormattedPlayerLevelWithoutPrestige(player));
-        level.setScore(index);
-        --index;
-        Score xp = objective.getScore(GrindingSystem.getInstance().getPlayerLevel(player) >= 120 ? ChatColor.WHITE + "XP: " + ChatColor.AQUA + "MAXED!" : ChatColor.WHITE + "Needed XP: " + ChatColor.AQUA + GrindingSystem.getInstance().getPlayerNeededXP(player));
-        xp.setScore(index);
-        --index;
-        Score space2 = objective.getScore("  ");
-        space2.setScore(index);
-        --index;
-        Score gold = objective.getScore(ChatColor.WHITE + "Gold: " + ChatColor.GOLD + GrindingSystem.getInstance().getFormattedPlayerGold(player));
-        gold.setScore(index);
-        --index;
-        Score space3 = objective.getScore("   ");
-        space3.setScore(index);
-        --index;
-        Score status = objective.getScore(ChatColor.WHITE + "Status: " + (!CombatManager.getInstance().playerIsInCombat(player) ? ChatColor.GREEN + "Idling" : ChatColor.RED + "Fighting " + ChatColor.GRAY + "(" + CombatManager.getInstance().getCombatTime(player) + ")"));
-        status.setScore(index);
-        --index;
-        Score space4 = objective.getScore("    ");
-        space4.setScore(index);
-        --index;
-        Score serverinfo = objective.getScore(ChatColor.YELLOW + "traficantes.wtf");
-        serverinfo.setScore(index);
-        this.updateNametag(player, board);
+        objective.getScore(ChatColor.WHITE + "Level: " + GrindingSystem.getInstance().getFormattedPlayerLevelWithoutPrestige(player)).setScore(index--);
+        objective.getScore(GrindingSystem.getInstance().getPlayerLevel(player) >= 120 ? ChatColor.WHITE + "XP: " + ChatColor.AQUA + "MAXED!" : ChatColor.WHITE + "Needed XP: " + ChatColor.AQUA + GrindingSystem.getInstance().getPlayerNeededXP(player)).setScore(index--);
+        objective.getScore("  ").setScore(index--);
+        objective.getScore(ChatColor.WHITE + "Gold: " + ChatColor.GOLD + GrindingSystem.getInstance().getFormattedPlayerGold(player)).setScore(index--);
+        objective.getScore("   ").setScore(index--);
+        objective.getScore(ChatColor.WHITE + "Status: " + (!CombatManager.getInstance().playerIsInCombat(player) ? ChatColor.GREEN + "Idling" : ChatColor.RED + "Fighting " + ChatColor.GRAY + "(" + CombatManager.getInstance().getCombatTime(player) + ")")).setScore(index--);
+        objective.getScore("    ").setScore(index--);
+        objective.getScore(ChatColor.YELLOW + "traficantes.wtf").setScore(index);
+
+        updateNametag(player, board);
+
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         player.setScoreboard(board);
     }
 
     public Objective getScoreboardObjective(Scoreboard board, Player player) {
-        KillStreakPlayer streaker = ((KillStreaks)KillStreaks.getBukkitPlugin()).getPlayerStorage().get(player);
-        if (board.getObjective("test") != null) {
-            board.getObjective("test").unregister();
+
+        Objective existingObjective = board.getObjective("test");
+        if (existingObjective != null) {
+            existingObjective.unregister();
         }
 
         Objective objective = board.registerNewObjective("test", "dummy");
         objective.setDisplayName(ChatColor.YELLOW.toString() + ChatColor.BOLD + "FABIAN'S PIT SANDBOX");
+        
         int index = 11;
-        if (RomanUtils.getInstance().convertToRomanNumeral(GrindingSystem.getInstance().getPlayerPrestige(player)).equalsIgnoreCase("None")) {
-            --index;
-        }
+        boolean hasPrestige = !RomanUtils.getInstance().convertToRomanNumeral(GrindingSystem.getInstance().getPlayerPrestige(player)).equalsIgnoreCase("None");
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
         Date date = new Date();
-        Score dataAndInstance = objective.getScore(ChatColor.GRAY + simpleDateFormat.format(date) + ChatColor.DARK_GRAY + " mega17A");
-        dataAndInstance.setScore(index);
-        --index;
-        Score space1 = objective.getScore(" ");
-        space1.setScore(index);
-        --index;
-        Score level;
-        if (!RomanUtils.getInstance().convertToRomanNumeral(GrindingSystem.getInstance().getPlayerPrestige(player)).equalsIgnoreCase("None")) {
-            level = objective.getScore(ChatColor.WHITE + "Prestige: " + ChatColor.YELLOW + RomanUtils.getInstance().convertToRomanNumeral(GrindingSystem.getInstance().getPlayerPrestige(player)));
-            level.setScore(index);
-            --index;
+
+        objective.getScore(ChatColor.GRAY + dateFormat.format(date) + ChatColor.DARK_GRAY + " mega17A").setScore(index--);
+        objective.getScore(" ").setScore(index--);
+
+        if (hasPrestige) {
+            objective.getScore(ChatColor.WHITE + "Prestige: " + ChatColor.YELLOW + RomanUtils.getInstance().convertToRomanNumeral(GrindingSystem.getInstance().getPlayerPrestige(player))).setScore(index--);
         }
 
-        level = objective.getScore(ChatColor.WHITE + "Level: " + GrindingSystem.getInstance().getFormattedPlayerLevelWithoutPrestige(player));
-        level.setScore(index);
-        --index;
-        Score xp = objective.getScore(GrindingSystem.getInstance().getPlayerLevel(player) >= 120 ? ChatColor.WHITE + "XP: " + ChatColor.AQUA + "MAXED!" : ChatColor.WHITE + "Needed XP: " + ChatColor.AQUA + GrindingSystem.getInstance().getPlayerNeededXP(player));
-        xp.setScore(index);
-        --index;
-        Score space2 = objective.getScore("  ");
-        space2.setScore(index);
-        --index;
-        Score gold = objective.getScore(ChatColor.WHITE + "Gold: " + ChatColor.GOLD + GrindingSystem.getInstance().getFormattedPlayerGold(player));
-        gold.setScore(index);
-        --index;
-        Score space3 = objective.getScore("   ");
-        space3.setScore(index);
-        --index;
-        Score status = objective.getScore(ChatColor.WHITE + "Status: " + (!CombatManager.getInstance().playerIsInCombat(player) ? ChatColor.GREEN + "Idling" : ChatColor.RED + "Fighting " + ChatColor.GRAY + "(" + CombatManager.getInstance().getCombatTime(player) + ")"));
-        status.setScore(index);
-        --index;
-        Score space4 = objective.getScore("    ");
-        space4.setScore(index);
-        --index;
-        Score serverinfo = objective.getScore(ChatColor.YELLOW + "traficantes.wtf");
-        serverinfo.setScore(index);
+        objective.getScore(ChatColor.WHITE + "Level: " + GrindingSystem.getInstance().getFormattedPlayerLevelWithoutPrestige(player)).setScore(index--);
+        objective.getScore(GrindingSystem.getInstance().getPlayerLevel(player) >= 120 ? ChatColor.WHITE + "XP: " + ChatColor.AQUA + "MAXED!" : ChatColor.WHITE + "Needed XP: " + ChatColor.AQUA + GrindingSystem.getInstance().getPlayerNeededXP(player)).setScore(index--);
+        objective.getScore("  ").setScore(index--);
+        objective.getScore(ChatColor.WHITE + "Gold: " + ChatColor.GOLD + GrindingSystem.getInstance().getFormattedPlayerGold(player)).setScore(index--);
+        objective.getScore("   ").setScore(index--);
+        objective.getScore(ChatColor.WHITE + "Status: " + (!CombatManager.getInstance().playerIsInCombat(player) ? ChatColor.GREEN + "Idling" : ChatColor.RED + "Fighting " + ChatColor.GRAY + "(" + CombatManager.getInstance().getCombatTime(player) + ")")).setScore(index--);
+        objective.getScore("    ").setScore(index--);
+        objective.getScore(ChatColor.YELLOW + "traficantes.wtf").setScore(index);
+
         return objective;
     }
 
