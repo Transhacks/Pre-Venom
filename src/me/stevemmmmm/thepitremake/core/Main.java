@@ -85,6 +85,7 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
     public static String prefix;
     public static String version;
     private static final int WORKER_THREADS = 4;
+    private Killstreak killstreak;
 
     static {
         prefix = ChatColor.YELLOW.toString() + ChatColor.BOLD + "Fabian's Pit Sandbox " + ChatColor.LIGHT_PURPLE + " ▶  ";
@@ -184,10 +185,11 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
             getServer().getPluginManager().registerEvents(new ChatManagement(), this);
             getServer().getPluginManager().registerEvents(new TogglePvPCommand(), this);
             getServer().getPluginManager().registerEvents(new AntiFire(), this);
-            Killstreak killstreak = new Killstreak();
-            getServer().getPluginManager().registerEvents(killstreak, this);
+            getServer().getPluginManager().registerEvents(Killstreak.getInstance(), this);
             getServer().getPluginManager().registerEvents(new LivesSystem(), this);
             getServer().getPluginManager().registerEvents(new KillAnnouncementCommand(), this);
+            
+            this.killstreak = Killstreak.getInstance();
             
             getCommand("pitenchant").setExecutor(new EnchantCommand());
             getCommand("mysticenchants").setExecutor(new MysticEnchantsCommand());
@@ -310,6 +312,7 @@ public class Main extends JavaPlugin implements ServerGame, Listener {
     		new PurpleGold(),
     		new RespawnAbsorption(),
     		new Revitalize(),
+    		new RGM(),
     		new RingArmor(),
     		new Selfcheckout(),
     		new Solitude(),

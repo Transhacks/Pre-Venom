@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class UnenchantCommand implements CommandExecutor, TabCompleter {
 	
     private void sendErrorMessage(Player player, String message) {
-        player.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "WHOOPS!" + ChatColor.GRAY + " " + message);
+        player.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "WHOOPS!" + ChatColor.GRAY + "" + message);
     }
     
     @Override

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import me.stevemmmmm.configapi.core.ConfigAPI;
+import me.stevemmmmm.thepitremake.managers.other.PitScoreboardManager;
 import me.stevemmmmm.configapi.core.ConfigReader;
 import me.stevemmmmm.configapi.core.ConfigWriter;
 import me.stevemmmmm.permissions.core.PermissionsManager;
@@ -53,6 +54,131 @@ public class GrindingSystem implements Listener, ConfigWriter, ConfigReader {
 
         return instance;
     }
+
+//    public void updateLevel(Player player) {
+//        if ((Integer)this.playerLevels.get(player.getUniqueId()) != 120) {
+//            if ((float)(Integer)this.playerXP.get(player.getUniqueId()) >= (float)(Integer)this.xpPerLevel.get((Integer)this.playerLevels.get(player.getUniqueId()) + 1) * (Float)this.prestigeMultiplier.getOrDefault(this.playerPrestiges.get(player.getUniqueId()), 1.0F)) {
+//                IChatBaseComponent chatTitle = ChatSerializer.a("{\"text\": \"" + ChatColor.AQUA.toString() + ChatColor.BOLD + "LEVEL UP!" + "\",color:" + ChatColor.GOLD.name().toLowerCase() + "}");
+//                PacketPlayOutTitle title = new PacketPlayOutTitle(EnumTitleAction.TITLE, chatTitle);
+//                PacketPlayOutTitle length = new PacketPlayOutTitle(20, 20, 20);
+//                IChatBaseComponent chatSubTitle = ChatSerializer.a("{\"text\": \"" + ChatColor.YELLOW + this.getFormattedPlayerLevelWithoutPrestige(player) + " ➟ " + this.getFutureFormattedPlayerLevelWithoutPrestige(player) + "\",color:" + ChatColor.GOLD.name().toLowerCase() + "}");
+//                PacketPlayOutTitle subTitle = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE, chatSubTitle);
+//                PacketPlayOutTitle subTitleLength = new PacketPlayOutTitle(20, 20, 20);
+//                PacketPlayOutChat message = new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + ChatColor.AQUA.toString() + ChatColor.BOLD + "LEVEL UP! " + ChatColor.YELLOW + getFormattedPlayerLevelWithoutPrestige(player) + " ➟ " + getFutureFormattedPlayerLevelWithoutPrestige(player) + "\",color:" + ChatColor.GOLD.name().toLowerCase() + "}"));
+//                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(title);
+//                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(length);
+//                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(subTitle);
+//                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(subTitleLength);
+//                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(message);
+//                this.playerLevels.put(player.getUniqueId(), (Integer)this.playerLevels.get(player.getUniqueId()) + 1);
+//            }
+//        }
+//   }
+
+//    public int giveRandomXP(Player player, int min, int max) {
+//        int xp = ThreadLocalRandom.current().nextInt(min, max);
+//        playerXP.put(player.getUniqueId(), playerXP.get(player.getUniqueId()) + xp);
+
+//        return xp;
+//    }
+
+
+//    public void giveGold(Player player, int amount) {
+//        this.playerGold.put(player.getUniqueId(), (Double)this.playerGold.get(player.getUniqueId()) + (double)amount);
+//    }
+    
+//    public void levelUp(Player player) {
+//        int currentXP = this.getPlayerXP(player);
+//        int neededXP = this.getPlayerNeededXP(player);
+//        int current = this.getPlayerLevel(player);
+//        if (currentXP >= neededXP && current <=119) {
+//        	this.playerXP.put(player.getUniqueId(), 0);
+//            this.playerLevels.put(player.getUniqueId(), this.playerLevels.get(player.getUniqueId()) + 1);
+//           this.updateLevel(player);
+//        }
+//    }
+    
+//    public void setXP(Player player, int amount) {
+//        int currentXP = getPlayerXP(player);
+//        int neededXP = Cwel(player);
+//        int newXP = currentXP + 4000;
+//        if (newXP < currentXP) {
+//            newXP = Integer.MAX_VALUE;
+//        }
+//        while (newXP >= neededXP) {
+//           levelUp(player);
+//            newXP -= neededXP;
+//            neededXP = Cwel(player);
+//        }
+//        playerXP.put(player.getUniqueId(), newXP);
+//    }
+
+
+//    public double giveRandomGold(Player player) {
+//        DecimalFormat df = new DecimalFormat("###.##");
+//        double gold = ThreadLocalRandom.current().nextDouble(10, 25);
+//        this.playerGold.put(player.getUniqueId(), Double.parseDouble(df.format(playerGold.get(player.getUniqueId()) + gold).replace(",", ".")));
+//        return gold;
+//    }
+//   
+//    public void giveXP(Player player, int amount) {
+//        this.playerXP.put(player.getUniqueId(), (Integer)this.playerXP.get(player.getUniqueId()) + amount);
+//    }
+//
+//    public int giveRandomXP(Player player) {
+//        int xp = ThreadLocalRandom.current().nextInt(22,30);
+//        playerXP.put(player.getUniqueId(), playerXP.get(player.getUniqueId()) + xp);
+//
+//        return xp;
+//    }
+//
+//
+//    public void giveGold(Player player, int amount) {
+//        this.playerGold.put(player.getUniqueId(), (Double)this.playerGold.get(player.getUniqueId()) + (double)amount);
+//    }
+//
+//    public double giveRandomGold(Player player) {
+//        DecimalFormat df = new DecimalFormat("###.##");
+//       double gold = ThreadLocalRandom.current().nextDouble(10, 25);
+//        this.playerGold.put(player.getUniqueId(), Double.parseDouble(df.format(playerGold.get(player.getUniqueId()) + gold).replace(",", ".")));
+//        return gold;
+//    }
+//    @EventHandler
+//    public void onPlayerKill(PlayerDeathEvent event) {
+//        if (event.getEntity().getKiller() == null) {
+//            event.getEntity().sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "DEATH!");
+//        } else if (event.getEntity().getName().equalsIgnoreCase(event.getEntity().getKiller().getName())) {
+//            event.getEntity().sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "DEATH!");
+//        } else {
+//            Player player = event.getEntity().getKiller();
+//            DecimalFormat df = new DecimalFormat("##0.00");
+//            event.getEntity().sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "DEATH! " + ChatColor.GRAY + "by " + this.getFormattedPlayerLevelWithoutPrestige(player) + " " + PermissionsManager.getInstance().getPlayerRank(player).getNameColor() + player.getName() + " " + ChatColor.YELLOW.toString() + ChatColor.BOLD + "VIEW RECAP");
+//            IChatBaseComponent chatTitle = ChatSerializer.a("{\"text\": \"" + ChatColor.RED + "YOU DIED" + "\",color:" + ChatColor.GOLD.name().toLowerCase() + "}");
+//            PacketPlayOutTitle title = new PacketPlayOutTitle(EnumTitleAction.TITLE, chatTitle);
+//            PacketPlayOutTitle length = new PacketPlayOutTitle(20, 20, 20);
+//            ((CraftPlayer)event.getEntity()).getHandle().playerConnection.sendPacket(title);
+//            ((CraftPlayer)event.getEntity()).getHandle().playerConnection.sendPacket(length);
+//            int currentLevel = this.getPlayerLevel(player);
+//            if (currentLevel < 120) {
+//                this.updateLevel(event.getEntity().getKiller());
+//            }
+//            event.getEntity().getKiller().playSound(event.getEntity().getKiller().getLocation(), Sound.ORB_PICKUP, 1.0F, 1.75F);
+//            PacketPlayOutChat packet = new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + PermissionsManager.getInstance().getPlayerRank(event.getEntity()).getNameColor() + event.getEntity().getName() + ChatColor.GREEN.toString() + ChatColor.BOLD + " KILL! \"}"), (byte)2);
+//            ((CraftPlayer)event.getEntity().getKiller()).getHandle().playerConnection.sendPacket(packet);
+//            ++kills;
+//        }
+//    }
+//  public int neededXP(Player player) {
+//  return (Integer)this.xpPerLevel.get((Integer)this.playerLevels.get(player.getUniqueId()) + 1);
+//}
+
+//public int Cwel(Player player) {
+//  int level = getPlayerLevel(player);
+//  if (level < 1) {
+//      return 0;
+//  }
+//  return xpPerLevel.get(level);
+//}
 
     public void updateLevel(Player player) {
         if ((Integer)this.playerLevels.get(player.getUniqueId()) != 120) {
@@ -124,15 +250,41 @@ public class GrindingSystem implements Listener, ConfigWriter, ConfigReader {
             ++kills;
         }
     }
-
+    
     private void initializeMaps() {
-    	xpPerLevel.put(1, 20);
+        xpPerLevel.put(1, 9);
 
-    	for (int i = 2; i <= 120; i++) {
-    	    xpPerLevel.put(i, xpPerLevel.get(i - 1) + 20 * i);
-    	}
-     }
-	
+        for (int i = 2; i <= 9; i++) {
+            int lastLevelXP = xpPerLevel.get(i - 1);
+            int nextLevelXP = (int) (lastLevelXP * 1.15);
+            xpPerLevel.put(i, nextLevelXP);
+        }
+
+        xpPerLevel.put(10, 20);
+
+        for (int i = 11; i <= 19; i++) {
+            int lastLevelXP = xpPerLevel.get(i - 1);
+            int nextLevelXP = (int) (lastLevelXP * 1.08);
+            xpPerLevel.put(i, nextLevelXP);
+        }
+        
+        xpPerLevel.put(20, 37);
+        
+        for (int i = 21; i <= 39; i++) {
+            int lastLevelXP = xpPerLevel.get(i - 1);
+            int nextLevelXP = (int) (lastLevelXP * 1.12);
+            xpPerLevel.put(i, nextLevelXP);
+        }
+
+        xpPerLevel.put(40, 139);
+        
+        for (int i = 21; i <= 120; i++) {
+            int lastLevelXP = xpPerLevel.get(i - 1);
+            int nextLevelXP = (int) (lastLevelXP * 1.04);
+            xpPerLevel.put(i, nextLevelXP);
+        }
+    }
+    
     public int getPlayerLevel(Player player) {
         return (Integer)this.playerLevels.getOrDefault(player.getUniqueId(), 0);
     }
@@ -744,7 +896,12 @@ public class GrindingSystem implements Listener, ConfigWriter, ConfigReader {
     }
 
     public int getPlayerNeededXP(Player player) {
-        return (Integer)this.xpPerLevel.get((Integer)this.playerLevels.get(player.getUniqueId()) + 1);
+    	int currentLevel = this.getPlayerLevel(player);
+    	if (currentLevel <= 119) {
+    		return (Integer)this.xpPerLevel.get((Integer)this.playerLevels.get(player.getUniqueId()) + 1);
+    	} else {
+    		return (Integer)this.xpPerLevel.get((Integer)this.playerLevels.get(player.getUniqueId()) + 0);
+    	}
     }
 
 

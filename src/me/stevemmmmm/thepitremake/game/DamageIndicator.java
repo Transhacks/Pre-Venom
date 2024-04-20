@@ -4,6 +4,7 @@ import me.stevemmmmm.permissions.core.PermissionsManager;
 import me.stevemmmmm.thepitremake.managers.enchants.DamageManager;
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,14 +29,33 @@ public class DamageIndicator implements Listener {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player) || !(event.getEntity() instanceof Player)) return;
+        if (!(event.getDamager() instanceof Player) || !(event.getEntity() instanceof Player)) {
+            if (event.getDamager() instanceof Arrow) {
+                Arrow arrow = (Arrow) event.getDamager();
+                if (arrow.getShooter() instanceof Player) {
+                    Player shooter = (Player) arrow.getShooter();
+                    Player attacked = (Player) event.getEntity();
+
+                    if (RegionManager.getInstance().playerIsInRegion(attacked, RegionManager.RegionType.SPAWN) ||
+                            !DamageManager.getInstance().isEventNotCancelled(event) ||
+                            DamageManager.getInstance().playerIsInCanceledEvent(shooter)) {
+                        return;
+                    }
+
+                    displayIndicator(shooter, attacked, DamageManager.getInstance().getFinalDamageFromEvent(event));
+                }
+            }
+            return;
+        }
 
         Player damager = (Player) event.getDamager();
         Player attacked = (Player) event.getEntity();
 
         if (RegionManager.getInstance().playerIsInRegion(attacked, RegionManager.RegionType.SPAWN) ||
                 !DamageManager.getInstance().isEventNotCancelled(event) ||
-                DamageManager.getInstance().playerIsInCanceledEvent(damager)) return;
+                DamageManager.getInstance().playerIsInCanceledEvent(damager)) {
+            return;
+        }
 
         displayIndicator(damager, attacked, DamageManager.getInstance().getFinalDamageFromEvent(event));
     }

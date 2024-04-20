@@ -167,7 +167,7 @@ public class EnchantCommand implements TabExecutor {
                     "Assassin", "Billy", "BooBoo", "Cricket", "CriticallyFunky", "DavidandGoliath", "DiamondAllergy",
                     "DoubleJump", "EscapePod", "FractionalReserve", "GottaGoFast", "Hearts", "LastStand", "Lodbrok",
                     "McSwimmer", "Mirror", "Negotiator", "NotGladiator", "Pebble", "Peroxide", "Prick", "Protection", 
-                    "PurpleGold", "RespawnAbsorption", "Revitalize", "RingArmor", "Selfcheckout", "Solitude", "TNT",
+                    "PurpleGold", "RespawnAbsorption", "Revitalize", "RGM", "RingArmor", "Selfcheckout", "Solitude", "TNT",
                     "CriticallyRich", "GoldBoost", "GoldBump", "Moctezuma", "StrikeGold", "Sweaty", "XPBoost", "XPBump"
             ));
         }

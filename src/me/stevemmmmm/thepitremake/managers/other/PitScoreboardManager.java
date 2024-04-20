@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.UUID;
+
+import me.confuser.killstreaks.storage.PlayerStorage;
 import me.stevemmmmm.permissions.core.PermissionsManager;
 import me.stevemmmmm.thepitremake.core.Main;
 import me.stevemmmmm.thepitremake.game.CombatManager;
@@ -19,17 +21,17 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 public class PitScoreboardManager implements Listener {
     private static PitScoreboardManager instance;
+    public PlayerStorage playerStorage;
     private final HashMap<UUID, Integer> scoreboardTasks = new HashMap();
     private final HashMap<UUID, Scoreboard> playerToScoreboard = new HashMap();
-    private final Killstreak killstreak;
 
     public PitScoreboardManager() {
-    	this.killstreak = new Killstreak();
     }
 
     public static PitScoreboardManager getInstance() {
@@ -47,10 +49,10 @@ public class PitScoreboardManager implements Listener {
             this.playerToScoreboard.put(player.getUniqueId(), Bukkit.getScoreboardManager().getNewScoreboard());
             player.setScoreboard((Scoreboard)this.playerToScoreboard.get(player.getUniqueId()));
             this.scoreboardTasks.put(player.getUniqueId(), Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Main.INSTANCE, () -> {
-                this.updateScoreboard(player);
+                int currentKills = Killstreak.getInstance().killCounts.getOrDefault(player.getUniqueId(), 0);
+                this.updateScoreboard(player, currentKills);
             }, 20L, 20L));
         }
-
     }
 
     @EventHandler
@@ -62,13 +64,20 @@ public class PitScoreboardManager implements Listener {
 
     }
 
-    private void updateScoreboard(Player player) {
+    public void createScoreboard(Player player) {
+        Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
+        Objective objective = this.getScoreboardObjective(board, player);
+        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        player.setScoreboard(board);
+    }
+    public void updateScoreboard(Player player, int Streak) {
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective objective = board.registerNewObjective("test", "dummy");
         objective.setDisplayName(ChatColor.YELLOW.toString() + ChatColor.BOLD + "FABIAN'S PIT SANDBOX");
         
         int index = 11;
         boolean hasPrestige = !RomanUtils.getInstance().convertToRomanNumeral(GrindingSystem.getInstance().getPlayerPrestige(player)).equalsIgnoreCase("None");
+        boolean isOver = Killstreak.getInstance().isOverdrive.getOrDefault(player, false);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
         Date date = new Date();
@@ -85,7 +94,25 @@ public class PitScoreboardManager implements Listener {
         objective.getScore("  ").setScore(index--);
         objective.getScore(ChatColor.WHITE + "Gold: " + ChatColor.GOLD + GrindingSystem.getInstance().getFormattedPlayerGold(player)).setScore(index--);
         objective.getScore("   ").setScore(index--);
-        objective.getScore(ChatColor.WHITE + "Status: " + (!CombatManager.getInstance().playerIsInCombat(player) ? ChatColor.GREEN + "Idling" : ChatColor.RED + "Fighting " + ChatColor.GRAY + "(" + CombatManager.getInstance().getCombatTime(player) + ")")).setScore(index--);
+
+        String text;
+        if (isOver) {
+            text = ChatColor.RED + "Overdrive";
+        } else if (CombatManager.getInstance().playerIsInCombat(player)) {
+            text = ChatColor.RED + "Fighting " + ChatColor.GRAY + "(" + CombatManager.getInstance().getCombatTime(player) + ")";
+        } else {
+            text = ChatColor.GREEN + "Idling";
+        }
+        Score status = objective.getScore(ChatColor.WHITE + "Status: " + text);
+        status.setScore(index);
+        --index;
+
+        if (Streak > 0) {
+            Score streak = objective.getScore(ChatColor.WHITE + "Streak: "  + ChatColor.GREEN + Streak);
+            streak.setScore(index);
+            index--;
+                  	
+        }
         objective.getScore("    ").setScore(index--);
         objective.getScore(ChatColor.YELLOW + "traficantes.wtf").setScore(index);
 

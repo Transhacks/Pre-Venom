@@ -1,5 +1,10 @@
 package me.stevemmmmm.thepitremake.game.killstreaks;
 
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -13,31 +18,63 @@ import me.stevemmmmm.permissions.core.PermissionsManager;
 import me.stevemmmmm.permissions.core.Rank;
 import me.stevemmmmm.thepitremake.core.Main;
 import me.stevemmmmm.thepitremake.managers.other.GrindingSystem;
-
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import me.stevemmmmm.thepitremake.managers.other.PitScoreboardManager;
 
 public class Killstreak implements Listener {
+    private static Killstreak instance;
+    public Map<UUID, Integer> killCounts;
+    public Map<Player, Boolean> isOverdrive;
 
-	private Map<UUID, Integer> killCounts;
+    public Killstreak() {
+        this.killCounts = new HashMap<>();
+        this.isOverdrive = new HashMap<>();
+    }
 
-	public Killstreak() {
-		this.killCounts = new HashMap<>();
-	}
+    public static Killstreak getInstance() {
+        if (instance == null) {
+            instance = new Killstreak();
+        }
+        return instance;
+    }
+    
+    public void incrementKillCount(Player player, Player victim) {
+        UUID playerId = player.getUniqueId();
+        int currentKills = killCounts.getOrDefault(playerId, 0);
+        killCounts.put(playerId, currentKills + 1);
+        PitScoreboardManager.getInstance().updateScoreboard(player, currentKills + 1);
+        handleKillMessages(player, victim, currentKills);
+        playKillSound(player, currentKills);
+        checkStreak(player);
+    }
 
-	public void incrementKillCount(Player player, Player victim) {
-		UUID playerId = player.getUniqueId();
-		int currentKills = killCounts.getOrDefault(playerId, 0);
-		killCounts.put(playerId, currentKills + 1);
+    private void handleKillMessages(Player player, Player victim, int currentKills) {
+    	//int randomXP;
+    	//int baseMin = 15;
+    	//int baseMax = 25;
+        //String killMessage;
+        //DecimalFormat df = new DecimalFormat("##0.00");
 
-		handleKillMessages(player, victim, currentKills);
-		playKillSound(player, currentKills);
-		checkStreak(player);
-	}
+        //GrindingSystem grindingSystem = GrindingSystem.getInstance();
 
-	private void handleKillMessages(Player player, Player victim, int currentKills) {
+        //Rank playerRank = PermissionsManager.getInstance().getPlayerRank(victim);
+        //String displayName = grindingSystem.getFormattedPlayerLevelWithoutPrestige(victim) + playerRank.getNameColor() + " " + victim.getName();
+       
+        //String killerName = grindingSystem.getFormattedPlayerLevelWithoutPrestige(player) + PermissionsManager.getInstance().getPlayerRank(player).getNameColor() + " " + player.getName();
+        
+        //if (currentKills <= 9) {
+        //    randomXP = grindingSystem.giveRandomXP(player, baseMin, baseMax);
+        //} else if (currentKills <= 150) {
+        //    int baseXP = (currentKills / 10) * (baseMax - baseMin);
+        //    randomXP = grindingSystem.giveRandomXP(player, baseMin + baseXP, baseMax + baseXP);
+        // } else {
+        //   randomXP = grindingSystem.giveRandomXP(player, 80, 90);
+        //}
+               
+        //double randomGold = grindingSystem.giveRandomGold(player);
+        
+        //String xpMessage = ChatColor.AQUA + " +" + randomXP + "XP";
+        //String goldMessage = ChatColor.GOLD + " +" + df.format(randomGold) + "g";
+    	
 		String killMessage;
 		DecimalFormat df = new DecimalFormat("##0.00");
 
@@ -53,36 +90,47 @@ public class Killstreak implements Listener {
 		String xpMessage = ChatColor.AQUA + " +" + randomXP + "XP";
 		String goldMessage = ChatColor.GOLD + " +" + df.format(randomGold) + "g";
 
-		switch (currentKills) {
-		case 1:
-			killMessage = ChatColor.translateAlternateColorCodes('&',
-					"&a&lDOUBLE KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
-			break;
-		case 2:
-			killMessage = ChatColor.translateAlternateColorCodes('&',
-					"&a&lTRIPLE KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
-			break;
-		case 3:
-			killMessage = ChatColor.translateAlternateColorCodes('&',
-					"&a&lQUADRA KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
-			break;
-		case 4:
-			killMessage = ChatColor.translateAlternateColorCodes('&',
-					"&a&lPENTA KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
-			break;
-		default:
-			if (currentKills > 4) {
-				killMessage = ChatColor.translateAlternateColorCodes('&',
-						"&a&lMULTI KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
-			} else {
-				killMessage = ChatColor.translateAlternateColorCodes('&',
-						"&a&lKILL! &r&7on &c" + displayName + xpMessage + goldMessage);
-			}
-			break;
-		}
+        switch (currentKills) {
+            case 1:
+                killMessage = ChatColor.translateAlternateColorCodes('&',
+                        "&a&lDOUBLE KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
+                break;
+            case 2:
+                killMessage = ChatColor.translateAlternateColorCodes('&',
+                        "&a&lTRIPLE KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
+                break;
+            case 3:
+                killMessage = ChatColor.translateAlternateColorCodes('&',
+                        "&a&lQUADRA KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
+                break;
+            case 4:
+                killMessage = ChatColor.translateAlternateColorCodes('&',
+                        "&a&lPENTA KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
+                break;
+          //case 49:
+          //    player.getWorld().strikeLightningEffect(player.getLocation());
+          //    String message = ChatColor.translateAlternateColorCodes('&',
+          //            "&c&lMEGASTREAK! &r&7" + killerName + " activated &c" + "&c&lOVERDRIVE!");
 
-		player.sendMessage(killMessage);
-	}
+            //   Bukkit.broadcastMessage(message);
+            //   isOverdrive.put(player, true);
+            default:
+                if (currentKills > 4) {
+                    killMessage = ChatColor.translateAlternateColorCodes('&',
+                            "&a&lMULTI KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
+          //   } else if (currentKills >= 49) {
+          //        killMessage = ChatColor.translateAlternateColorCodes('&',
+          //                "&a&lMULTI KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
+          //       break;
+                } else {
+                    killMessage = ChatColor.translateAlternateColorCodes('&',
+                            "&a&lKILL! &r&7on &c" + displayName + xpMessage + goldMessage);
+                }
+                break;
+        }
+
+        player.sendMessage(killMessage);
+    }
 
 	private void playKillSound(Player player, int currentKills) {
 
@@ -146,27 +194,41 @@ public class Killstreak implements Listener {
 		}
 	}
 
-	@EventHandler
-	public void onPlayerDeath(PlayerDeathEvent event) {
-		Player player = event.getEntity();
-		UUID playerId = player.getUniqueId();
-		removeKillCount(playerId);
-		if (player.getKiller() instanceof Player) {
-			Player killer = player.getKiller();
-			incrementKillCount(killer, player);
-		}
-	}
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        UUID playerId = player.getUniqueId();
+        removeKillCount(playerId);
+        
+        if (player.getKiller() instanceof Player) {
+            Player killer = player.getKiller();
+            incrementKillCount(killer, player);
+        }
+        //if (isOverdrive.getOrDefault(player, false)) {
+        //    String message = ChatColor.translateAlternateColorCodes('&',
+        //            "&c&lOVRDRV! &r&7Earned &b+4.000 XP &7from megastreak!");
+        //    player.sendMessage(message);
+        //    GrindingSystem grindingSystem = GrindingSystem.getInstance();
 
+        //    grindingSystem.setXP(player, 1000);
+        //    isOverdrive.put(player, false);
+  //      }
+    }
+    
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
 		UUID playerId = player.getUniqueId();
 		removeKillCount(playerId);
 	}
-
+    
 	public void removeKillCount(UUID playerId) {
 		if (killCounts.containsKey(playerId)) {
 			killCounts.remove(playerId);
 		}
+	}
+
+	public Map<UUID, Integer> currentStreak() {
+		return this.killCounts;
 	}
 }
