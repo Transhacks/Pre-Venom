@@ -103,7 +103,7 @@ public class Volley extends CustomEnchant {
 
     @Override
     public boolean isDisabledOnPassiveWorld() {
-        return true;
+        return false;
     }
 
     @Override

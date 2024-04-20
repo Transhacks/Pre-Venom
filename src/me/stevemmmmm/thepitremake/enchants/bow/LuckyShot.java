@@ -105,7 +105,7 @@ public class LuckyShot extends CustomEnchant {
 
     @Override
     public boolean isDisabledOnPassiveWorld() {
-        return true;
+        return false;
     }
 
     @Override
