@@ -1,9 +1,11 @@
 package me.stevemmmmm.thepitremake.managers.other;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.UUID;
 
 import me.confuser.killstreaks.storage.PlayerStorage;
@@ -74,6 +76,9 @@ public class PitScoreboardManager implements Listener {
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective objective = board.registerNewObjective("test", "dummy");
         objective.setDisplayName(ChatColor.YELLOW.toString() + ChatColor.BOLD + "FABIAN'S PIT SANDBOX");
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.US);
+        Long playerNeededXP = GrindingSystem.getInstance().getPlayerNeededXP(player);
+        String formattedXP = numberFormat.format(playerNeededXP);
         
         int index = 11;
         boolean hasPrestige = !RomanUtils.getInstance().convertToRomanNumeral(GrindingSystem.getInstance().getPlayerPrestige(player)).equalsIgnoreCase("None");
@@ -90,7 +95,7 @@ public class PitScoreboardManager implements Listener {
         }
 
         objective.getScore(ChatColor.WHITE + "Level: " + GrindingSystem.getInstance().getFormattedPlayerLevelWithoutPrestige(player)).setScore(index--);
-        objective.getScore(GrindingSystem.getInstance().getPlayerLevel(player) >= 120 ? ChatColor.WHITE + "XP: " + ChatColor.AQUA + "MAXED!" : ChatColor.WHITE + "Needed XP: " + ChatColor.AQUA + GrindingSystem.getInstance().getPlayerNeededXP(player)).setScore(index--);
+        objective.getScore(GrindingSystem.getInstance().getPlayerLevel(player) >= 120 ? ChatColor.WHITE + "XP: " + ChatColor.AQUA + "MAXED!" : ChatColor.WHITE + "Needed XP: " + ChatColor.AQUA + formattedXP).setScore(index--);
         objective.getScore("  ").setScore(index--);
         objective.getScore(ChatColor.WHITE + "Gold: " + ChatColor.GOLD + GrindingSystem.getInstance().getFormattedPlayerGold(player)).setScore(index--);
         objective.getScore("   ").setScore(index--);
