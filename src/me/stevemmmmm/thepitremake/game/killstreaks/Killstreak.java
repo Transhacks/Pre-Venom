@@ -47,34 +47,7 @@ public class Killstreak implements Listener {
         checkStreak(player);
     }
 
-    private void handleKillMessages(Player player, Player victim, int currentKills) {
-    	//int randomXP;
-    	//int baseMin = 15;
-    	//int baseMax = 25;
-        //String killMessage;
-        //DecimalFormat df = new DecimalFormat("##0.00");
-
-        //GrindingSystem grindingSystem = GrindingSystem.getInstance();
-
-        //Rank playerRank = PermissionsManager.getInstance().getPlayerRank(victim);
-        //String displayName = grindingSystem.getFormattedPlayerLevelWithoutPrestige(victim) + playerRank.getNameColor() + " " + victim.getName();
-       
-        //String killerName = grindingSystem.getFormattedPlayerLevelWithoutPrestige(player) + PermissionsManager.getInstance().getPlayerRank(player).getNameColor() + " " + player.getName();
-        
-        //if (currentKills <= 9) {
-        //    randomXP = grindingSystem.giveRandomXP(player, baseMin, baseMax);
-        //} else if (currentKills <= 150) {
-        //    int baseXP = (currentKills / 10) * (baseMax - baseMin);
-        //    randomXP = grindingSystem.giveRandomXP(player, baseMin + baseXP, baseMax + baseXP);
-        // } else {
-        //   randomXP = grindingSystem.giveRandomXP(player, 80, 90);
-        //}
-               
-        //double randomGold = grindingSystem.giveRandomGold(player);
-        
-        //String xpMessage = ChatColor.AQUA + " +" + randomXP + "XP";
-        //String goldMessage = ChatColor.GOLD + " +" + df.format(randomGold) + "g";
-    	
+    private void handleKillMessages(Player player, Player victim, int currentKills) {	
 		String killMessage;
 		DecimalFormat df = new DecimalFormat("##0.00");
 
@@ -107,21 +80,10 @@ public class Killstreak implements Listener {
                 killMessage = ChatColor.translateAlternateColorCodes('&',
                         "&a&lPENTA KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
                 break;
-          //case 49:
-          //    player.getWorld().strikeLightningEffect(player.getLocation());
-          //    String message = ChatColor.translateAlternateColorCodes('&',
-          //            "&c&lMEGASTREAK! &r&7" + killerName + " activated &c" + "&c&lOVERDRIVE!");
-
-            //   Bukkit.broadcastMessage(message);
-            //   isOverdrive.put(player, true);
             default:
                 if (currentKills > 4) {
                     killMessage = ChatColor.translateAlternateColorCodes('&',
                             "&a&lMULTI KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
-          //   } else if (currentKills >= 49) {
-          //        killMessage = ChatColor.translateAlternateColorCodes('&',
-          //                "&a&lMULTI KILL! &r&7on &c" + displayName + xpMessage + goldMessage);
-          //       break;
                 } else {
                     killMessage = ChatColor.translateAlternateColorCodes('&',
                             "&a&lKILL! &r&7on &c" + displayName + xpMessage + goldMessage);
@@ -138,22 +100,22 @@ public class Killstreak implements Listener {
 
 		switch (currentKills) {
 		case 1:
-			pitches = new float[] { 1.75f, 1.7936507f };
+			pitches = new float[] { 1.7936507f };
 			break;
 		case 2:
-			pitches = new float[] { 1.75f, 1.7936507f, 1.8253968f };
+			pitches = new float[] { 1.7936507f, 1.8253968f };
 			break;
 		case 3:
-			pitches = new float[] { 1.75f, 1.7936507f, 1.8253968f, 1.8730159f };
+			pitches = new float[] { 1.7936507f, 1.8253968f, 1.8730159f };
 			break;
 		case 4:
-			pitches = new float[] { 1.75f, 1.7936507f, 1.8253968f, 1.8730159f, 1.9047619f };
+			pitches = new float[] { 1.7936507f, 1.8253968f, 1.8730159f, 1.9047619f };
 			break;
 		default:
 			if (currentKills > 4) {
-				pitches = new float[] { 1.75f, 1.7936507f, 1.8253968f, 1.8730159f, 1.9047619f, 1.95232009f };
+				pitches = new float[] { 1.7936507f, 1.8253968f, 1.8730159f, 1.9047619f, 1.95232009f };
 			} else {
-				pitches = new float[] { 1.75f };
+				pitches = new float[] { 1.7936507f };
 			}
 			break;
 		}
@@ -204,15 +166,6 @@ public class Killstreak implements Listener {
             Player killer = player.getKiller();
             incrementKillCount(killer, player);
         }
-        //if (isOverdrive.getOrDefault(player, false)) {
-        //    String message = ChatColor.translateAlternateColorCodes('&',
-        //            "&c&lOVRDRV! &r&7Earned &b+4.000 XP &7from megastreak!");
-        //    player.sendMessage(message);
-        //    GrindingSystem grindingSystem = GrindingSystem.getInstance();
-
-        //    grindingSystem.setXP(player, 1000);
-        //    isOverdrive.put(player, false);
-  //      }
     }
     
 	@EventHandler
