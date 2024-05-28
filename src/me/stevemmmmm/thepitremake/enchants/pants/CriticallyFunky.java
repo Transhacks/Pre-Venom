@@ -72,7 +72,7 @@ public class CriticallyFunky extends CustomEnchant {
 
     @Override
     public String getEnchantReferenceName() {
-        return "Critfunky";
+        return "CriticallyFunky";
     }
 
     @Override

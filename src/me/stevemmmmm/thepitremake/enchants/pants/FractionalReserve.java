@@ -48,7 +48,7 @@ public class FractionalReserve extends CustomEnchant {
 
     @Override
     public String getEnchantReferenceName() {
-        return "Frac";
+        return "FractionalReserve";
     }
 
     @Override
